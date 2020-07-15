@@ -12,4 +12,16 @@ export class DishService {
   getDishes() : Array<Dish> {
     return DISHES;
   }
+
+  getDish(id : string) : Dish{
+    return DISHES.filter(function(dish){
+      return dish.id === id
+    })[0];
+  }
+
+  getFeatured() : Dish{
+    return DISHES.find(function(dish){
+      return dish.featured == true;
+    });
+  }
 }
