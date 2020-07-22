@@ -26,6 +26,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {MatSelectModule} from '@angular/material/select'; 
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ReactiveFormsModule
+    ,MatSlideToggleModule,
+    MatSelectModule
   ],
   providers: [
     DishService,
