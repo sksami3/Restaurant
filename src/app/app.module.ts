@@ -28,7 +28,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
-import {MatSelectModule} from '@angular/material/select'; 
+import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule
     ,MatSlideToggleModule,
     MatSelectModule
+    ,MatProgressSpinnerModule
   ],
   providers: [
     DishService,
