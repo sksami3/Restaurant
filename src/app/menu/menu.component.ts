@@ -12,22 +12,22 @@ import { DishService } from '../services/dish.service';
 
 
 export class MenuComponent implements OnInit {
-  
+
   dishes: Array<Dish>;
 
-  selectedDish : Dish;
+  selectedDish: Dish;
 
 
-  constructor(private dishService : DishService) { 
+  constructor(private dishService: DishService) {
 
   }
 
-  clickedDish(d : Dish){
+  clickedDish(d: Dish) {
     this.selectedDish = d;
   }
 
   ngOnInit(): void {
-      this.dishes = this.dishService.getDishes();
+    this.dishService.getDishes().then((d) => this.dishes = d);
   }
 
 }
