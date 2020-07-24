@@ -90,7 +90,7 @@ export class ContactComponent implements OnInit {
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
-      telnum: '+88',
+      telnum: '88',
       email: '',
       agree: false,
       contacttype: 'None',
