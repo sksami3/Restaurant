@@ -1,0 +1,2 @@
+npm install json-server -g
+json-server --watch db.json -d 2000
