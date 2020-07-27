@@ -15,7 +15,7 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Array<Dish>;
-
+  menuErrMsg : string;
   //selectedDish: Dish;
 
 
@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.dishService.getDishes().subscribe((d) => this.dishes = d);
+    this.dishService.getDishes().subscribe((d) => this.dishes = d,errorM => this.menuErrMsg = errorM);
   }
 
 }

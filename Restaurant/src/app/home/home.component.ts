@@ -14,6 +14,9 @@ import { Leader } from '../Shared/leader';
 export class HomeComponent implements OnInit {
 
   dish: Dish;
+  dishErrorMessage: string;
+  promotionErrorMessage: string;
+  leaderErrorMessage: string;
   promotion: Promotion;
   leader: Leader;
 
@@ -23,10 +26,12 @@ export class HomeComponent implements OnInit {
     @Inject('BaseURL') private BaseURL) { }
 
   ngOnInit(): void {
-      this.dishService.getFeatured().subscribe((d) => this.dish =  d);
-      this.promotionService.getFeatured().then((p) => this.promotion = p);
-      this.leaderService.getFeatured().subscribe((t) => this.leader = t);
-      console.log(this.leader);
+      this.dishService.getFeatured().subscribe((d) => this.dish =  d, (errorMsg) => this.dishErrorMessage = errorMsg);
+      this.promotionService.getFeatured().then((p) => this.promotion = p, (errorMsg) => this.promotionErrorMessage = errorMsg);
+      this.leaderService.getFeatured().subscribe((t) => this.leader = t, (errorMsg) => this.leaderErrorMessage = errorMsg);
+      console.log(this.dishErrorMessage);
+      console.log(this.promotionErrorMessage);
+      console.log(this.leaderErrorMessage);
   }
 
 }
