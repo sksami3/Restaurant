@@ -10,7 +10,7 @@
         <mat-grid-list cols="2" rowHeight="4:2">
             <mat-grid-tile *ngFor="let d of dishes" [routerLink]="['/dishDetail', d.id]">
                 <!-- (click) = "clickedDish(d)" -->
-                <img height="100%" src="{{d.image}}" alt="{{d.name}}">
+                <img height="100%" src="{{ BaseURL + d.image }}" alt="{{d.name}}">
                 <mat-grid-tile-footer style="background-color:rebeccapurple">
                     <h1 mat-line>{{d.name | uppercase}}</h1>
                 </mat-grid-tile-footer>

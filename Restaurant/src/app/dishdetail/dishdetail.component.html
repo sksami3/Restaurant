@@ -1,15 +1,14 @@
-<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
-    fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
     <div fxFlex="40">
         <div fxFlex *ngIf="dish">
             <mat-card>
                 <mat-card-header>
-                    <img mat-card-avatar src="{{dish.image}}" alt="{{dish.name}}">
+                    <img mat-card-avatar src="{{BaseURL + dish.image}}" alt="{{dish.name}}">
                     <mat-card-title>{{dish.name | uppercase}}</mat-card-title>
                     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
                 </mat-card-header>
-                <img mat-card-image src="{{dish.image}}" alt="{{dish.image}}">
+                <img mat-card-image src="{{BaseURL + dish.image}}" alt="{{dish.image}}">
                 <mat-card-content>
                     <p>
                         {{dish.description}}
@@ -65,24 +64,21 @@
                     <mat-form-field class="fullWidth">
                         <mat-label>Author</mat-label>
                         <input formControlName="author" matInput placeholder="Author">
-                        <mat-error *ngIf="commentFormError.author">{{commentFormError.author}}                         
+                        <mat-error *ngIf="commentFormError.author">{{commentFormError.author}}
                         </mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-label>Rating</mat-label>
-                    <mat-slider class="example-margin" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min"
-                        [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="getSliderTickInterval()"
-                        formControlName="rating"[vertical]="vertical">
+                    <mat-slider class="example-margin" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="getSliderTickInterval()" formControlName="rating" [vertical]="vertical">
                     </mat-slider>
                 </p>
                 <p>
                     <mat-form-field class="fullWidth">
                         <mat-label>Comment</mat-label>
-                        <textarea formControlName="comment" matInput placeholder="Comment" rows="4"
-                            cols="50"></textarea>
-                            <mat-error *ngIf="commentFormError.comment">{{commentFormError.comment}}                         
-                            </mat-error>
+                        <textarea formControlName="comment" matInput placeholder="Comment" rows="4" cols="50"></textarea>
+                        <mat-error *ngIf="commentFormError.comment">{{commentFormError.comment}}
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <button type="submit" [disabled]="commentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
