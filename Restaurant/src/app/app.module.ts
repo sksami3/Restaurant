@@ -33,7 +33,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider'; 
 import { HttpClientModule }    from '@angular/common/http';
 import {baseURL} from './Shared/baseurl';
-import {ProcessHTTPMsgService} from './services/process-httpmsg.service'
+import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
+import { HighliteDirective } from './directives/highlite.directive'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {ProcessHTTPMsgService} from './services/process-httpmsg.service'
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent   
+    LoginComponent,
+    HighliteDirective   
   ],
   imports: [
     BrowserModule,

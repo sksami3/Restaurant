@@ -17,6 +17,7 @@ export class DishdetailComponent implements OnInit {
   @ViewChild('cform') feedbackFormDirective;
   // @Input()
   dish: Dish;
+  dishCopy: Dish;
   dishErrMessage : string;
   dishIds: Array<string>;
   prev: string;
@@ -48,7 +49,7 @@ export class DishdetailComponent implements OnInit {
   ngOnInit(): void {
     this.dishService.getDishIds().subscribe((dishIds) => this.dishIds = dishIds,errorMsg => this.dishErrMessage = errorMsg);
     this.rout.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-      .subscribe((dish) => { this.dish = dish; this.setPrevNext(dish.id) },function(errorMsg){ return this.dishErrMessage = errorMsg; } );
+      .subscribe((dish) => { this.dish = dish; this.dishCopy = dish; this.setPrevNext(dish.id) },function(errorMsg){ return this.dishErrMessage = errorMsg; } );
 
     // const id = this.rout.snapshot.params['id'];
     // this.dishService.getDish(id).subscribe((dish) => this.dish = dish);
@@ -127,7 +128,11 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toString();
     console.log(this.comment);
-    this.dish.comments.push(this.comment);
+    //this.dish.comments.push(this.comment);
+    this.dishCopy.comments.push(this.comment);
+    this.dishService.putDishe(this.dishCopy)
+    .subscribe((d) => {this.dish = d, this.dishCopy = d},
+    (errmsg) => {this.dish = null, this.dishCopy = null, this.dishErrMessage = <any>errmsg})
   }
 
 

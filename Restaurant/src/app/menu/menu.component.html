@@ -8,7 +8,7 @@
 
     <div fxFlex *ngIf="dishes">
         <mat-grid-list cols="2" rowHeight="4:2">
-            <mat-grid-tile *ngFor="let d of dishes" [routerLink]="['/dishDetail', d.id]">
+            <mat-grid-tile *ngFor="let d of dishes" [routerLink]="['/dishDetail', d.id]" appHighlite>
                 <!-- (click) = "clickedDish(d)" -->
                 <img height="100%" src="{{ BaseURL + d.image }}" alt="{{d.name}}">
                 <mat-grid-tile-footer style="background-color:rebeccapurple">

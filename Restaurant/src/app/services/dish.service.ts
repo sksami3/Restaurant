@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Dish } from '../Shared/dish';
 import { Observable,of, pipe } from 'rxjs';
 import{delay, map, catchError} from 'rxjs/operators'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {baseURL} from '../Shared/baseurl';
 import{ProcessHTTPMsgService} from './process-httpmsg.service';
 
@@ -33,6 +33,17 @@ export class DishService
         return dish.id;
       })
     })).pipe(catchError(this.processHTTPMsgService.handleError));;
+  }
+
+  putDishe(dish : Dish):Observable<Dish>{
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id,dish,httpOptions)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
 }
