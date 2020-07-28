@@ -43,52 +43,71 @@
     <div fxFlex>
         <div fxLayout="row">
 
-            <div fxFlex="75" fxFlexOffset="2">
-                <form #fform="ngForm" novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-                    <p>
-                        <mat-form-field class="half-width">
-                            <input matInput formControlName="firstname" placeholder="First Name" type="text">
-                            <!-- <mat-error *ngIf="feedbackForm.get('firstname').hasError('required') && feedbackForm.get('firstname').touched">
+            <div fxFlex="75" fxFlexOffset="2" [@expand]>
+                <div [hidden]="waitFor5Sec || runSpinner">
+                    <form #fform="ngForm" novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+                        <p>
+                            <mat-form-field class="half-width">
+                                <input matInput formControlName="firstname" placeholder="First Name" type="text">
+                                <!-- <mat-error *ngIf="feedbackForm.get('firstname').hasError('required') && feedbackForm.get('firstname').touched">
                 First Name is required</mat-error> -->
-                            <mat-error *ngIf="formErrors.firstname">{{formErrors.firstname}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="half-width">
-                            <input matInput formControlName="lastname" placeholder="Last Name" type="text" required>
-                            <mat-error *ngIf="formErrors.lastname">{{formErrors.lastname}}</mat-error>
-                        </mat-form-field>
-                    </p>
-                    <p>
-                        <mat-form-field class="half-width">
-                            <input matInput formControlName="telnum" placeholder="Tel. Number" type="tel" required pattern="[0-9]*">
-                            <mat-error *ngIf="formErrors.telnum">{{formErrors.telnum}}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="half-width">
-                            <input matInput formControlName="email" placeholder="Email" type="email" required email>
-                            <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
-                        </mat-form-field>
-                    </p>
-                    <table class="form-size">
-                        <td>
-                            <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
-                        </td>
-                        <td>
-                            <mat-select placeholder="How?" formControlName="contacttype">
-                                <mat-option *ngFor="let ctype of contactType" [value]="ctype">
-                                    {{ ctype }}
-                                </mat-option>
-                            </mat-select>
-                        </td>
-                    </table>
-                    <p>
-                        <mat-form-field class="full-width">
-                            <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
-                        </mat-form-field>
-                    </p>
-                    <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
-                </form>
+                                <mat-error *ngIf="formErrors.firstname">{{formErrors.firstname}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="half-width">
+                                <input matInput formControlName="lastname" placeholder="Last Name" type="text" required>
+                                <mat-error *ngIf="formErrors.lastname">{{formErrors.lastname}}</mat-error>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field class="half-width">
+                                <input matInput formControlName="telnum" placeholder="Tel. Number" type="tel" required pattern="[0-9]*">
+                                <mat-error *ngIf="formErrors.telnum">{{formErrors.telnum}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="half-width">
+                                <input matInput formControlName="email" placeholder="Email" type="email" required email>
+                                <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+                            </mat-form-field>
+                        </p>
+                        <table class="form-size">
+                            <td>
+                                <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
+                            </td>
+                            <td>
+                                <mat-select placeholder="How?" formControlName="contacttype">
+                                    <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+                                        {{ ctype }}
+                                    </mat-option>
+                                </mat-select>
+                            </td>
+                        </table>
+                        <p>
+                            <mat-form-field class="full-width">
+                                <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
+                            </mat-form-field>
+                        </p>
+                        <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+                    </form>
+                </div>
+
+                <div *ngIf="runSpinner && !waitFor5Sec" fxLayoutAlign="space-around center" [@expand]>
+                    <mat-spinner></mat-spinner>
+                    <h4 *ngIf="!feedBackErrorMsg">Loading . . . Please Wait</h4>
+                    <h4 *ngIf="feedBackErrorMsg">{{feedBackErrorMsg}}</h4>
+                </div>
             </div>
         </div>
     </div><br>
 
+    <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf="waitFor5Sec" [@expand]>
+        <h2><b>Your Submission</b></h2>
+        <p>First Name: {{feedBackReturnObject.firstname}}</p>
+        <p>Last Name: {{feedBackReturnObject.lastname}}</p>
+        <p>Tel. Number: {{feedBackReturnObject.telnum}}</p>
+        <p>Email: {{feedBackReturnObject.email}}</p>
+        <p>Contact You?: {{feedBackReturnObject.agree}}</p>
+        <p>How?: {{feedBackReturnObject.contacttype}}</p>
+        <p>Feedback?: {{feedBackReturnObject.message}}</p>
+        <!-- {{feedBackReturnObject | json}} -->
+    </div>
 
 </div>

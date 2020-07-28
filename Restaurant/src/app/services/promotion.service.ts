@@ -1,34 +1,26 @@
 import { Injectable } from '@angular/core';
 import{ Promotion } from '../Shared/promotion'
 import{ PROMOTIONS } from '../Shared/promotions'
+import { Observable } from 'rxjs';
+import {HttpClient} from '@angular/common/http'
+import { baseURL } from '../Shared/baseurl';
+import { ProcessHTTPMsgService } from '../services/process-httpmsg.service';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PromotionService {
 
-  constructor() { }
+  constructor(private http:HttpClient, private ProcessHTTPMsgService: ProcessHTTPMsgService) { }
 
-  getPromotions(): Promise<Array<Promotion>>{
-    //return Promise.resolve(PROMOTIONS);
-    return new Promise(function(resolve,reject){
-      setTimeout(function(){
-        return resolve(PROMOTIONS);
-      })
-    })
+  getPromotions(): Observable<Array<Promotion>>{
+    return this.http.get<Array<Promotion>>(baseURL+'promotions').pipe(catchError(this.ProcessHTTPMsgService.handleError));
   }
-  getPromotion(id : string) : Promise<Promotion>{
-    // return Promise.resolve(PROMOTIONS.filter((promotion) => {
-    //   return promotion.id === id
-    // })[0]);
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(PROMOTIONS.filter((promotion) => 
-        promotion.id === id
-        )[0]),3000);
-    })
+  getPromotion(id : string) : Observable<Promotion>{
+    return this.http.get<Promotion>(baseURL+'promotions/'+id).pipe(catchError(this.ProcessHTTPMsgService.handleError));
   }
-  getFeatured() : Promise<Promotion>{
-    //return Promise.resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]);
-    return new Promise((resolve) => setTimeout(() => resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]),2000));
+  getFeatured() : Observable<Promotion>{
+    return this.http.get<Promotion>(baseURL+'promotions?featured=true').pipe(map((promotions) => promotions[0])).pipe(catchError(this.ProcessHTTPMsgService.handleError));
   }
 }

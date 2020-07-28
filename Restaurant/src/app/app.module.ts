@@ -34,7 +34,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { HttpClientModule }    from '@angular/common/http';
 import {baseURL} from './Shared/baseurl';
 import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
-import { HighliteDirective } from './directives/highlite.directive'
+import { HighliteDirective } from './directives/highlite.directive';
+import {FeedbackService} from './services/feedback.service';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { HighliteDirective } from './directives/highlite.directive'
     PromotionService,
     LeaderService,
     ProcessHTTPMsgService,
+    FeedbackService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent],

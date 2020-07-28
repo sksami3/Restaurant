@@ -36,11 +36,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
       this.dishService.getFeatured().subscribe((d) => this.dish =  d, (errorMsg) => this.dishErrorMessage = errorMsg);
-      this.promotionService.getFeatured().then((p) => this.promotion = p, (errorMsg) => this.promotionErrorMessage = errorMsg);
-      this.leaderService.getFeatured().subscribe((t) => this.leader = t, (errorMsg) => this.leaderErrorMessage = errorMsg);
-      console.log(this.dishErrorMessage);
-      console.log(this.promotionErrorMessage);
-      console.log(this.leaderErrorMessage);
+      this.promotionService.getFeatured().subscribe((p) => this.promotion = p, (errorMsg) => this.promotionErrorMessage = errorMsg);
+      this.leaderService.getFeatured().subscribe((l) => this.leader = l, (errorMsg) => this.leaderErrorMessage = errorMsg);
   }
 
 }

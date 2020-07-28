@@ -1,12 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+"use strict";
+
+import { Component, OnInit, ViewChild, resolveForwardRef } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Feedback, ContactType } from '../Shared/feedback'
+import { Feedback, ContactType } from '../Shared/feedback';
+import { FeedbackService } from '../services/feedback.service';
+import { expand } from '../animations/app.animation';
 
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  animations:[
+    expand()
+  ]
 })
 export class ContactComponent implements OnInit {
   @ViewChild('fform') feedbackFormDirective;
@@ -14,8 +21,12 @@ export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
+  feedBackReturnObject: Feedback;
+  feedBackErrorMsg: string;
+  waitFor5Sec: boolean = false;
+  runSpinner: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _feedbackService: FeedbackService) {
     this.createFormGroup();
   }
 
@@ -86,16 +97,42 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '88',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
-    });
+    this.runSpinner = true;
+
+    new Promise<Feedback>((resolve, reject) => {
+      this._feedbackService.submitFeedback(this.feedback)
+        .subscribe(f => resolve(f), errMSG => reject(errMSG));
+    })
+      .then(value => {
+        this.feedBackReturnObject = value,
+          this.waitFor5Sec = true;
+        setTimeout(() => {
+          this.waitFor5Sec = false;
+          this.runSpinner = false;
+        }, 5000)
+      })
+      .catch(error => {
+        this.feedBackErrorMsg = error;
+        setTimeout(() => {
+          this.waitFor5Sec = false;
+          this.runSpinner = false;
+        }, 5000)
+      })
+      .finally(() => {
+        //this.waitFor5Sec = false;
+        this.feedbackForm.reset({
+          firstname: '',
+          lastname: '',
+          telnum: '88',
+          email: '',
+          agree: false,
+          contacttype: 'None',
+          message: ''
+        });
+      });
+
   }
+
+
 
 }

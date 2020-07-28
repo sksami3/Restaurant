@@ -254,5 +254,226 @@
       "description": "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
     }
   ],
-  "feedback": []
+  "feedback": [
+    {
+      "firstname": "Sk Samiur",
+      "lastname": "Rahman",
+      "telnum": "8801622689262",
+      "email": "sksami4456@gmail.com",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "Nice food!!!",
+      "id": 1
+    },
+    {
+      "firstname": "asdfasd",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "None",
+      "message": "afdss",
+      "id": 2
+    },
+    {
+      "firstname": "aadsf",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "asdfasdf",
+      "id": 3
+    },
+    {
+      "firstname": "aadsf",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "None",
+      "message": "xcbzb zdf dzfz",
+      "id": 4
+    },
+    {
+      "firstname": "sami",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "None",
+      "message": "asdf",
+      "id": 5
+    },
+    {
+      "firstname": "aadsf",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "None",
+      "message": "adsf",
+      "id": 6
+    },
+    {
+      "firstname": "aadsf",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "Tel",
+      "message": "asdfasfd",
+      "id": 7
+    },
+    {
+      "firstname": "lolla",
+      "lastname": "lulli",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "Email",
+      "message": "sadfafds",
+      "id": 8
+    },
+    {
+      "firstname": "sami",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "None",
+      "message": "asdfasdf",
+      "id": 9
+    },
+    {
+      "firstname": "sami",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "wertwet ",
+      "id": 10
+    },
+    {
+      "firstname": "sasniu",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": true,
+      "contacttype": "Email",
+      "message": "asdfasd",
+      "id": 11
+    },
+    {
+      "firstname": "sasniu",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "sdaf",
+      "id": 12
+    },
+    {
+      "firstname": "sami",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "df xgdg ",
+      "id": 13
+    },
+    {
+      "firstname": "sasniu",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "adsf",
+      "id": 14
+    },
+    {
+      "firstname": "aadsf",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": false,
+      "contacttype": "Email",
+      "message": "sdfg",
+      "id": 15
+    },
+    {
+      "firstname": "sdfg",
+      "lastname": "sdfg",
+      "telnum": "88",
+      "email": "adsfasdf@ss.ss",
+      "agree": true,
+      "contacttype": "Email",
+      "message": "sdfg",
+      "id": 16
+    },
+    {
+      "firstname": "asdfasd",
+      "lastname": "lulli",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "sadf",
+      "id": 17
+    },
+    {
+      "firstname": "sasniu",
+      "lastname": "asdf",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "Email",
+      "message": "asdfsadf",
+      "id": 18
+    },
+    {
+      "firstname": "sasniu",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "sadfasdf",
+      "id": 19
+    },
+    {
+      "firstname": "sasniu",
+      "lastname": "Rahman",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": true,
+      "contacttype": "None",
+      "message": "sdfasdf",
+      "id": 20
+    },
+    {
+      "firstname": "asdfasd",
+      "lastname": "lulli",
+      "telnum": "88",
+      "email": "sksami4456@gmail.com",
+      "agree": false,
+      "contacttype": "None",
+      "message": "sdfg",
+      "id": 21
+    },
+    {
+      "firstname": "",
+      "lastname": "",
+      "telnum": "88",
+      "email": "",
+      "agree": false,
+      "contacttype": "None",
+      "message": "",
+      "id": 22
+    }
+  ]
 }
