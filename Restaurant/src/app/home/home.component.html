@@ -1,6 +1,6 @@
 <div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px">
 
-    <mat-card *ngIf="dish && !dishErrorMessage; else dishErrormsg" fxFlex>
+    <mat-card *ngIf="dish && !dishErrorMessage; else dishErrormsg" fxFlex [@expand]>
         <mat-card-header>
             <div mat-card-avatar></div>
             <mat-card-title>
@@ -14,7 +14,7 @@
         </mat-card-content>
     </mat-card>
 
-    <div [hidden]="dish">
+    <div [hidden]="dish" [@expand]>
         <mat-spinner></mat-spinner>
         <h4 *ngIf="!dishErrorMessage">Loading . . . Please Wait</h4>
     </div>
@@ -24,7 +24,7 @@
             <h4>{{dishErrorMessage}}</h4>
         </div>
     </ng-template>
-    <mat-card *ngIf="promotion && !promotionErrorMessage; else promotionErrormsg" fxFlex>
+    <mat-card *ngIf="promotion && !promotionErrorMessage; else promotionErrormsg" fxFlex [@expand]>
         <mat-card-header>
             <div mat-card-avatar></div>
             <mat-card-title>
@@ -43,13 +43,13 @@
             <h4>{{promotionErrorMessage}}</h4>
         </div>
     </ng-template>
-    <div [hidden]="promotion">
+    <div [hidden]="promotion" [@expand]>
         <mat-spinner></mat-spinner>
         <h4>Loading . . . Please Wait</h4>
     </div>
 
 
-    <mat-card *ngIf="leader && !leaderErrorMessage;else leaderErrormsg" fxFlex>
+    <mat-card *ngIf="leader && !leaderErrorMessage;else leaderErrormsg" fxFlex [@expand]>
         <mat-card-header>
             <div mat-card-avatar></div>
             <mat-card-title>
@@ -62,13 +62,13 @@
             </p>
         </mat-card-content>
     </mat-card>
-    <ng-template #leaderErrormsg>
+    <ng-template #leaderErrormsg [@expand]>
         <div fxFlex *ngIf="leaderErrorMessage">
             <h2>Error</h2>
             <h4>{{leaderErrorMessage}}</h4>
         </div>
     </ng-template>
-    <div [hidden]="leader">
+    <div [hidden]="leader" [@expand]>
         <mat-spinner></mat-spinner>
         <h4 *ngIf="!leaderErrorMessage">Loading . . . Please Wait</h4>
     </div>

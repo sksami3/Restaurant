@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <div fxFlex *ngIf="dishes">
+    <div fxFlex *ngIf="dishes" [@expand]>
         <mat-grid-list cols="2" rowHeight="4:2">
             <mat-grid-tile *ngFor="let d of dishes" [routerLink]="['/dishDetail', d.id]" appHighlite>
                 <!-- (click) = "clickedDish(d)" -->

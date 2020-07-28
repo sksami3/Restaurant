@@ -1,13 +1,21 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../Shared/dish';
-import { baseURL } from '../Shared/baseurl';
 import { DishService } from '../services/dish.service';
+import { controlInOutWithFlyingAnimation,expand } from '../animations/app.animation';
 
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    controlInOutWithFlyingAnimation(),
+    expand()
+  ]
 })
 
 
@@ -15,7 +23,7 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Array<Dish>;
-  menuErrMsg : string;
+  menuErrMsg: string;
   //selectedDish: Dish;
 
 
@@ -29,7 +37,7 @@ export class MenuComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.dishService.getDishes().subscribe((d) => this.dishes = d,errorM => this.menuErrMsg = errorM);
+    this.dishService.getDishes().subscribe((d) => this.dishes = d, errorM => this.menuErrMsg = errorM);
   }
 
 }
