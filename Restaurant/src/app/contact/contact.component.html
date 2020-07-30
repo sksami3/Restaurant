@@ -42,7 +42,6 @@
     <!-- reactive form -->
     <div fxFlex>
         <div fxLayout="row">
-
             <div fxFlex="75" fxFlexOffset="2" [@expand]>
                 <div [hidden]="waitFor5Sec || runSpinner">
                     <form #fform="ngForm" novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
@@ -89,7 +88,7 @@
                     </form>
                 </div>
 
-                <div *ngIf="runSpinner && !waitFor5Sec" fxLayoutAlign="space-around center" [@expand]>
+                <div *ngIf="runSpinner" fxLayoutAlign="space-around center" [@expand]>
                     <mat-spinner></mat-spinner>
                     <h4 *ngIf="!feedBackErrorMsg">Loading . . . Please Wait</h4>
                     <h4 *ngIf="feedBackErrorMsg">{{feedBackErrorMsg}}</h4>

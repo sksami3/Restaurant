@@ -11,7 +11,7 @@ import { expand } from '../animations/app.animation';
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  animations:[
+  animations: [
     expand()
   ]
 })
@@ -106,16 +106,16 @@ export class ContactComponent implements OnInit {
       .then(value => {
         this.feedBackReturnObject = value,
           this.waitFor5Sec = true;
-        setTimeout(() => {
-          this.waitFor5Sec = false;
           this.runSpinner = false;
+        setTimeout(() => {
+          this.waitFor5Sec = false;          
         }, 5000)
       })
       .catch(error => {
         this.feedBackErrorMsg = error;
+        this.runSpinner = false;
         setTimeout(() => {
           this.waitFor5Sec = false;
-          this.runSpinner = false;
         }, 5000)
       })
       .finally(() => {
