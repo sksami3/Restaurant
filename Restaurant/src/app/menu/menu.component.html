@@ -1,0 +1,34 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex>
+        <div>
+            <h3>Menu</h3>
+            <hr>
+        </div>
+    </div>
+
+    <div fxFlex *ngIf="dishes" [@expand]>
+        <mat-grid-list cols="2" rowHeight="4:2">
+            <mat-grid-tile *ngFor="let d of dishes" [routerLink]="['/dishDetail', d.id]" appHighlite>
+                <!-- (click) = "clickedDish(d)" -->
+                <img height="100%" src="{{ BaseURL + d.image }}" alt="{{d.name}}">
+                <mat-grid-tile-footer style="background-color:rebeccapurple">
+                    <h1 mat-line>{{d.name | uppercase}}</h1>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div [hidden]="dishes || menuErrMsg">
+        <mat-spinner></mat-spinner>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div fxFlex *ngIf="menuErrMsg">
+        <h2>Error</h2>
+        <h4>{{menuErrMsg}}</h4>
+    </div>
+
+    <!-- <app-dishdetail [dish] = "selectedDish"></app-dishdetail> -->
+
+
+
+</div>
