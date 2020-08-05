@@ -44,14 +44,14 @@
 
         <mat-list *ngIf="dish" [@visi]="visibility" [@expand]>
             <mat-list-item *ngFor="let c of dish.comments">
-                <p mat-line>{{ c.comment }}</p> <br>
+                <p mat-line>{{ c.viewerscomment }}</p> <br>
                 <p mat-line>{{ c.rating }} Stars</p> <br>
                 <p mat-line>-- {{ c.author }} {{c.date | date}}</p> <br>
                 <mat-divider></mat-divider>
             </mat-list-item>
             <br>
             <mat-list-item *ngIf="commentForm.valid">
-                <p mat-line>{{ commentForm.value.comment }}</p> <br>
+                <p mat-line>{{ commentForm.value.viewerscomment }}</p> <br>
                 <p mat-line>{{ commentForm.value.rating }} Stars</p> <br>
                 <p mat-line>-- {{ commentForm.value.author }}</p> <br>
                 <mat-divider></mat-divider>
@@ -82,8 +82,8 @@
                 <p>
                     <mat-form-field class="fullWidth">
                         <mat-label>Comment</mat-label>
-                        <textarea formControlName="comment" matInput placeholder="Comment" rows="4" cols="50"></textarea>
-                        <mat-error *ngIf="commentFormError.comment">{{commentFormError.comment}}
+                        <textarea formControlName="viewerscomment" matInput placeholder="Comment" rows="4" cols="50"></textarea>
+                        <mat-error *ngIf="commentFormError.viewerscomment">{{commentFormError.viewerscomment}}
                         </mat-error>
                     </mat-form-field>
                 </p>
