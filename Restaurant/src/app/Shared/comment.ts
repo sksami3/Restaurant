@@ -1,6 +1,7 @@
 export class Comment{
     rating: number;
-    comment: string;
+    viewerscomment: string;
     author: string;
     date: string;
+    dishId:number;
 }

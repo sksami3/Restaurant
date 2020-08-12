@@ -59,6 +59,7 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.dishService.getDishIds().subscribe((dishIds) => this.dishIds = dishIds, errorMsg => this.dishErrMessage = errorMsg);
+    
     this.rout.params.pipe(switchMap((params: Params) => { this.visibility = "_hidden"; return this.dishService.getDish(params['id']); }))
       .subscribe((dish) => { this.visibility = "_shown"; this.dish = dish; this.dishCopy = dish; this.setPrevNext(dish.id) }, function (errorMsg) { return this.dishErrMessage = errorMsg; });
 
@@ -79,7 +80,7 @@ export class DishdetailComponent implements OnInit {
 
   createForm() {
     this.commentForm = this.fb.group({
-      comment: ['', Validators.required],
+      viewerscomment: ['', Validators.required],
       author: ['', [Validators.required, Validators.minLength(2)]],
       rating: [5]
     });
@@ -87,12 +88,12 @@ export class DishdetailComponent implements OnInit {
   }
 
   commentFormError = {
-    'comment': '',
+    'viewerscomment': '',
     'author': '',
     'rating': ''
   };
   commentFormErrorMessage = {
-    'comment': {
+    'viewerscomment': {
       'required': 'Comment field can not be empty'
     },
     'author': {
@@ -136,14 +137,20 @@ export class DishdetailComponent implements OnInit {
 
 
   onSubmit() {
+    //console.log(this.rout.snapshot.params['id'] + typeof(this.rout.snapshot.params['id']))
     this.comment = this.commentForm.value;
-    this.comment.date = new Date().toString();
-    console.log(this.comment);
+    this.comment.date = new Date().toISOString();
+    this.comment.dishId = parseInt(this.dish.id);
     //this.dish.comments.push(this.comment);
-    this.dishCopy.comments.push(this.comment);
-    this.dishService.putDishe(this.dishCopy)
-      .subscribe((d) => { this.dish = d, this.dishCopy = d },
-        (errmsg) => { this.dish = null, this.dishCopy = null, this.dishErrMessage = <any>errmsg });
+    this.dishService.postComment(this.comment)
+    .subscribe(f => this.dishService.getDish(f.dishId.toString())
+    .subscribe(res => {console.log(res),this.dish = res, this.dishCopy = res}, err => {this.dish = null, this.dishCopy = null, this.dishErrMessage = err}),
+    (err)=> {this.dishErrMessage = <any>err, console.log(err)});
+
+
+    // this.dishService.putDishe(this.dishCopy)
+    //   .subscribe((d) => { this.dish = d, this.dishCopy = d },
+    //     (errmsg) => { this.dish = null, this.dishCopy = null, this.dishErrMessage = <any>errmsg });
     this.commentForm.reset(this.commentForm.value);
   }
 
