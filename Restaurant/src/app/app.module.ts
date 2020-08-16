@@ -36,6 +36,7 @@ import {baseURL} from './Shared/baseurl';
 import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
 import { HighliteDirective } from './directives/highlite.directive';
 import {FeedbackService} from './services/feedback.service';
+import {AdminDashboardModule} from './admin-dashboard/admin-dashboard.module'
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import {FeedbackService} from './services/feedback.service';
     ,MatProgressSpinnerModule
     ,MatSliderModule
     ,HttpClientModule
+    ,AdminDashboardModule//new module
   ],
   providers: [
     DishService,
