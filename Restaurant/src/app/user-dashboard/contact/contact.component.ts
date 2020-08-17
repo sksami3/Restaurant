@@ -2,9 +2,9 @@
 
 import { Component, OnInit, ViewChild, resolveForwardRef } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Feedback, ContactType } from '../Shared/feedback';
-import { FeedbackService } from '../services/feedback.service';
-import { expand } from '../animations/app.animation';
+import { Feedback, ContactType } from '../../Shared/feedback';
+import { FeedbackService } from '../../services/feedback.service';
+import { expand } from '../../animations/app.animation';
 
 
 @Component({

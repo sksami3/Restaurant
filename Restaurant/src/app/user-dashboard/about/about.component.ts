@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {LeaderService} from '../services/leader.service'
-import { Leader } from '../Shared/leader';
-import { controlInOutWithFlyingAnimation, expand } from '../animations/app.animation';
+import {LeaderService} from '../../services/leader.service'
+import { Leader } from '../../Shared/leader';
+import { controlInOutWithFlyingAnimation, expand } from '../../animations/app.animation';
 
 @Component({
   selector: 'app-about',
