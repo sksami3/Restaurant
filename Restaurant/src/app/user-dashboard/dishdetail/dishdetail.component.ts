@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
-import { Dish } from '../Shared/dish';
+import { Dish } from '../../Shared/dish';
 import { Routes, RouterModule, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common'
-import { DishService } from '../services/dish.service'
+import { DishService } from '../../services/dish.service'
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { Comment } from '../Shared/comment';
-import { visibility, controlInOutWithFlyingAnimation, expand } from '../animations/app.animation'
+import { Comment } from '../../Shared/comment';
+import { visibility, controlInOutWithFlyingAnimation, expand } from '../../animations/app.animation'
 
 @Component({
   selector: 'app-dishdetail',

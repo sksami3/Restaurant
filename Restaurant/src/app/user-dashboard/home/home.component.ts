@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, Inject } from '@angular/core';
-import { Dish } from '../shared/dish';
-import { DishService } from '../services/dish.service';
-import { Promotion } from '../shared/promotion';
-import { PromotionService } from '../services/promotion.service';
-import { LeaderService } from '../services/leader.service';
-import { Leader } from '../Shared/leader';
-import { controlInOutWithFlyingAnimation, expand } from '../animations/app.animation';
+import { Dish } from '../../shared/dish';
+import { DishService } from '../../services/dish.service';
+import { Promotion } from '../../shared/promotion';
+import { PromotionService } from '../../services/promotion.service';
+import { LeaderService } from '../../services/leader.service';
+import { Leader } from '../../Shared/leader';
+import { controlInOutWithFlyingAnimation, expand } from '../../animations/app.animation';
 
 @Component({
   selector: 'app-home',
