@@ -21,11 +21,12 @@ export class AuthenticationService {
     }
 
     public get userValue(): User {
+        console.log("userValue:---"+this.userSubject.value);
         return this.userSubject.value;
     }
 
     login(username: string, password: string) {
-        console.log("in login"+username);
+       
         return this.http.post<any>(`${baseURL}users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -36,9 +37,10 @@ export class AuthenticationService {
     }
 
     logout() {
+        console.log("logout called");
         // remove user from local storage to log user out
         localStorage.removeItem('user');
         this.userSubject.next(null);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
     }
 }
