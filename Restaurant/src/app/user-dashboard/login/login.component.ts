@@ -12,9 +12,9 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   user = { username: '', password: '', remember: false };
   error: string;
-  
 
-  constructor(public dialogRef: MatDialogRef<LoginComponent>, private authenticationService: AuthenticationService, private router : Router) {
+
+  constructor(public dialogRef: MatDialogRef<LoginComponent>, private authenticationService: AuthenticationService, private router: Router) {
     // redirect to home if already logged in
     if (this.authenticationService.userValue) {
       this.router.navigate(['/']);
@@ -23,20 +23,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  goToRegisterPage():void{
+    this.router.navigateByUrl('/createProfile');
+    this.dialogRef.close();
+  }
   onSubmit() {
     //console.log('User: ', this.user);
     this.dialogRef.close();
     this.authenticationService.login(this.user.username, this.user.password)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.router.navigate(['/menu']);
-                },
-                error => {
-                    this.error = error;
-                    console.log(error);
-                });
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/menu']);
+        },
+        error => {
+          this.error = error;
+          console.log(error);
+        });
   }
 
 }

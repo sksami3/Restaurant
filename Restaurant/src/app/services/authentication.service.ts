@@ -21,7 +21,7 @@ export class AuthenticationService {
     }
 
     public get userValue(): User {
-        console.log("userValue:---"+this.userSubject.value);
+        console.log(this.userSubject.value);
         return this.userSubject.value;
     }
 
@@ -37,7 +37,6 @@ export class AuthenticationService {
     }
 
     logout() {
-        console.log("logout called");
         // remove user from local storage to log user out
         localStorage.removeItem('user');
         this.userSubject.next(null);

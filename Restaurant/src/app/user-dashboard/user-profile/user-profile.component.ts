@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Role } from 'src/app/Shared/JWTModels/role';
 
 @Component({
   selector: 'app-user-profile',
@@ -34,28 +35,13 @@ export class UserProfileComponent implements OnInit {
   public progress: number;
   public message: string;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private http: HttpClient,private auth:AuthenticationService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private http: HttpClient, private auth: AuthenticationService) {
     this.setFormControls();
-
-
-    // this.uploader = new FileUploader({
-    //   url: 'http://localhost:9090/upload',
-    //   disableMultipart: false,
-    //   autoUpload: true
-    // });
-
-    // this.uploader.response.subscribe(res => {
-    //   // Upload returns a JSON with the image ID
-    //   this.url = 'http://localhost:9090/get/' + JSON.parse(res).id;
-    //   this.urlChange.emit(this.url);
-    // });
 
   }
 
   ngOnInit(): void {
     console.log("in user profile");
-    this.userService.getById(this.auth.userValue.id)
-    .subscribe(value => console.log(value),err => console.log(err));
   }
 
   public fileOver(e: any): void {
@@ -81,9 +67,6 @@ export class UserProfileComponent implements OnInit {
       control.markAsTouched({ onlySelf: true });
     });
   }
-
-  // get username() { return this.userDetailsForm.get('username'); }
-
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -101,43 +84,36 @@ export class UserProfileComponent implements OnInit {
     var returnObj: User;
     // if (this.userDetailsForm.valid) {
     this.userModel = this.userDetailsForm.value;
-
-    // } else {
-    //   this.invalidateForm();
-    // }
+    this.userModel.role = Role.User;
     this.fileToUpload = <File>this.uploadFile;
-    const formData = new FormData();
-    formData.append('file', this.fileToUpload, this.fileToUpload.name);
-    console.log(this.userModel);
-    //this.http.post('https://localhost:44306/users', { firstname: valueToBeSubmitted.firstName, lastname: valueToBeSubmitted.lastName, email: valueToBeSubmitted.email, image: formData, password: valueToBeSubmitted.password, username: valueToBeSubmitted.username }, { reportProgress: true, observe: 'events' })
 
-    // this.http.post('https://localhost:44306/users', { formData, valueToBeSubmitted }, { reportProgress: true, observe: 'events' })
-    //   .subscribe(event => {
-    //     if (event.type === HttpEventType.UploadProgress)
-    //       this.progress = Math.round(100 * event.loaded / event.total);
-    //     else if (event.type === HttpEventType.Response) {
-    //       this.message = 'Upload success.';
-    //       //this.onUploadFinished.emit(event.body);
-    //     }
-    //   });
-
-
-    var someting = new Promise<any>((resolve, reject) => {
-      try {
-        this.userService.uploadImage(formData).subscribe(f => { console.log(f);resolve(f); }, errMSG => { reject(errMSG) });
-      }
-      catch (Error) {
-        alert(Error);
-      }
-    }).then((value) => {
-      this.userModel.image = value;
+    if (this.fileToUpload) {
+      const formData = new FormData();
+      formData.append('file', this.fileToUpload, this.fileToUpload.name);
       console.log(this.userModel);
-      this.userService.create(this.userModel).subscribe(res => returnObj = res, err => this.message = err);
-    }).catch(err => {
-      console.log(err);
-      this.message = err.message;
+
+      var something = new Promise<any>((resolve, reject) => {
+        try {
+          this.userService.uploadImage(formData).subscribe(f => { console.log(f); resolve(f); }, errMSG => { reject(errMSG) });
+        }
+        catch (Error) {
+          alert(Error);
+        }
+      }).then((value) => {
+        this.userModel.image = value;
+        console.log(this.userModel);
+        this.userService.create(this.userModel).subscribe(res => returnObj = res, err => this.message = err);
+      }).catch(err => {
+        console.log(err);
+        this.message = err.message;
+      }
+      );
+
+      console.log(something);
     }
-    );
+    else {
+      this.userService.create(this.userModel).subscribe(res => returnObj = res, err => this.message = err);
+    }
   }
 
 }
