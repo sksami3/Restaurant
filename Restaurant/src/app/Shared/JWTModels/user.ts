@@ -8,4 +8,6 @@ export class User {
     lastName: string;
     role: Role;
     token?: string;
+    image: string;
+    email: string;
 }

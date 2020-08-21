@@ -1,0 +1,100 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <div>
+        <div class="profile-picture">
+            <div>
+                <img *ngIf="url" width=300 height=300 src="{{url}}" />
+                <label for="uploader-input" ng2FileDrop [ngClass]="{'drag-over': hasDragOver}" (fileOver)="fileOver($event)" [uploader]="uploader">
+          <div class="infotext"><span *ngIf="!url" >Drop your picture<br>or click to upload</span></div>
+        </label>
+                <input type="file" ng2FileSelect [uploader]="uploader" id="uploader-input" style="display:none" (change)="onSelectFile($event)" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+
+    <form [formGroup]="userDetailsForm" fxLayout="column">
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field fxFlex="40">
+                <mat-label>First Name</mat-label>
+                <input formControlName="firstname" matInput placeholder="First Name(Optional)">
+                <mat-error *ngIf="userDetailsForm.controls.firstname?.errors && userDetailsForm.controls.firstname?.touched">
+                    Please enter a valid First Name
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="40">
+                <mat-label>Last Name</mat-label>
+                <input formControlName="lastname" matInput placeholder="Last Name(Optional)">
+                <mat-error *ngIf="userDetailsForm.controls.lastname?.errors && userDetailsForm.controls.lastname?.touched">
+                    Please enter a valid First Name
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field fxFlex="40">
+                <mat-label>User Name</mat-label>
+                <input formControlName='username' matInput placeholder="User Name">
+                <mat-error *ngIf="userDetailsForm.controls.username?.errors && userDetailsForm.controls.username?.touched">
+                    Please enter a valid username
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field fxFlex="40">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput placeholder="Email">
+                <mat-error *ngIf="userDetailsForm.controls.email?.errors && userDetailsForm.controls.email?.touched">
+                    Please enter a valid Email Address
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field fxFlex="40">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput placeholder="Password" type="password">
+                <mat-error *ngIf="userDetailsForm.controls.password?.errors && userDetailsForm.controls.password?.touched">
+                    Please enter a valid Password
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <button color="primary" mat-raised-button (click)="submit()">Create Account</button>
+        </div>
+        <br>
+
+    </form>
+</div>
+<!-- <div fxLayout="row">
+    <div>
+        <button color="accent" mat-raised-button (click)="submit()">Save</button>
+    </div>
+</div> -->
+
+
+
+<!-- <mat-form-field >
+            <mat-label>Select a Date</mat-label>
+            <input formControlName="date" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="userDetailsForm.controls.date?.errors">
+              Please enter a valid date
+            </mat-error>
+          </mat-form-field> -->
+
+<!-- 
+          <form fxLayout="column" [formGroup]="contactForm">
+
+
+            <div class="input-row">
+                <mat-form-field fxFlex="40">
+                    <input matInput type="text" placeholder="EMAIL" formControlName="email">
+                </mat-form-field>
+            </div>
+        </form> -->

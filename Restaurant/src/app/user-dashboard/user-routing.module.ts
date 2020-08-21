@@ -8,6 +8,7 @@ import { ContactComponent } from '../user-dashboard/contact/contact.component';
 import { MenuComponent } from '../user-dashboard/menu/menu.component';
 import { DishdetailComponent } from '../user-dashboard/dishdetail/dishdetail.component';
 import { UserComponent } from '../user-dashboard/user/user.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 
@@ -33,6 +34,10 @@ export const routes: Routes = [
     {
         path: 'dishDetail/:id', component: UserComponent,
         children: [{ path: '', component: DishdetailComponent }]
+    },
+    {
+        path: 'createProfile', component: UserComponent,
+        children: [{ path: '', component: UserProfileComponent }]
     },
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

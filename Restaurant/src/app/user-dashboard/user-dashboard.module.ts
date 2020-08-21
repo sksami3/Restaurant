@@ -28,11 +28,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button'; 
 import {MatIconModule} from '@angular/material/icon'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { FileUploadModule } from 'ng2-file-upload';
 import 'hammerjs';
 import { UserComponent } from './user/user.component';
 import { UserRoutingModule } from './user-routing.module';
 
 import { HighliteDirective } from '../directives/highlite.directive';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import { HighliteDirective } from '../directives/highlite.directive';
     ContactComponent,
     LoginComponent,
     UserComponent,
-    HighliteDirective
+    HighliteDirective,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
@@ -70,6 +73,7 @@ import { HighliteDirective } from '../directives/highlite.directive';
     ,MatMenuModule
     ,MatIconModule
     ,UserRoutingModule
+    ,FileUploadModule
   ],
   entryComponents:[
     LoginComponent
