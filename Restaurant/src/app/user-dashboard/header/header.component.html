@@ -5,7 +5,26 @@
     <a mat-button routerLink='/menu' routerLinkActive="active"><span class="fa fa-list fa-lg"></span> Menu</a>
     <a mat-button routerLink='/contact' routerLinkActive="active"><span class="fa fa-address-card fa-lg"></span> Contact</a>
     <span class="flex-spacer"></span>
-    <a mat-button (click) = "openLoginForm()"><span class="fa fa-user fa-lg"></span>Login</a>
+    <a mat-button *ngIf='!isLoggedIn' (click)="openLoginForm()"><span class="fa fa-user fa-lg"></span>Login</a>
+
+    <span><img [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" *ngIf='isLoggedIn' class="mat-card-avatar" src="{{BaseURL + user.image}}" alt="image" appHighlite></span>
+    <mat-menu class="bccolor" #menu="matMenu" [overlapTrigger]="false">
+        <span (mouseleave)="undoDropProfileDetails()">
+
+          <button mat-menu-item [routerLink]="['/createProfile']">
+            <mat-icon>account_box</mat-icon>
+            <span>Account</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+
+        </span>
+    </mat-menu>
+
+
+
 </mat-toolbar>
 
 <div class="container jumbotron" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center" fxLayoutGap="10px">

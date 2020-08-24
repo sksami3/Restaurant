@@ -1,88 +1,57 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MenuComponent } from './menu/menu.component';
-import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list'; 
-import { MatCardModule } from '@angular/material/card';  
-import { MatButtonModule } from '@angular/material/button'; 
-import 'hammerjs';
-import { DishdetailComponent } from './dishdetail/dishdetail.component';
-import { DishService } from './services/dish.service';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
+
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { UserRoutingModule } from './user-dashboard/user-routing.module';
 import { PromotionService } from './services/promotion.service'
 import { LeaderService } from './services/leader.service';
-import { LoginComponent } from './login/login.component';
-import {MatDialogModule} from '@angular/material/dialog'; 
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import { FormsModule }   from '@angular/forms';
-import {MatInputModule} from '@angular/material/input'; 
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+
+
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
-import {MatSelectModule} from '@angular/material/select';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
-import {MatSliderModule} from '@angular/material/slider'; 
-import { HttpClientModule }    from '@angular/common/http';
-import {baseURL} from './Shared/baseurl';
-import {ProcessHTTPMsgService} from './services/process-httpmsg.service';
-import { HighliteDirective } from './directives/highlite.directive';
-import {FeedbackService} from './services/feedback.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { baseURL } from './Shared/baseurl';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { DishService } from './services/dish.service';
+
+import { FeedbackService } from './services/feedback.service';
+import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
+import { UserDashboardModule } from './user-dashboard/user-dashboard.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {JwtInterceptor} from './helper/jwt.interceptor';
+import {ErrorInterceptor} from './helper/error.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MenuComponent,
-    DishdetailComponent,
-    HeaderComponent,
-    FooterComponent,
-    AboutComponent,
-    HomeComponent,
-    ContactComponent,
-    LoginComponent,
-    HighliteDirective   
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatToolbarModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
+    UserRoutingModule,
     AppRoutingModule,
-    MatDialogModule,
-    MatFormFieldModule,
     FormsModule,
-    MatInputModule,
-    MatCheckboxModule,
     ReactiveFormsModule
-    ,MatSlideToggleModule,
-    MatSelectModule
-    ,MatProgressSpinnerModule
-    ,MatSliderModule
-    ,HttpClientModule
+    , HttpClientModule
+    , AdminDashboardModule//new module
+    , UserDashboardModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     DishService,
     PromotionService,
     LeaderService,
     ProcessHTTPMsgService,
     FeedbackService,
-    {provide: 'BaseURL', useValue: baseURL}
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: 'BaseURL', useValue: baseURL }
   ],
-  bootstrap: [AppComponent],
-  entryComponents:[
-    LoginComponent
-  ]
+  bootstrap: [AppComponent]
+
 })
 export class AppModule { }

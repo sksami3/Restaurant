@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Dish } from '../Shared/dish';
-import { DishService } from '../services/dish.service';
-import { controlInOutWithFlyingAnimation,expand } from '../animations/app.animation';
+import { Dish } from '../../Shared/dish';
+import { DishService } from '../../services/dish.service';
+import { controlInOutWithFlyingAnimation,expand } from '../../animations/app.animation';
 
 
 @Component({

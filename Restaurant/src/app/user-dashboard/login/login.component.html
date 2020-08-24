@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+    Login
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
+<p style="visibility: hidden;">{{user | json }}</p>
+
+<form #loginForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+    <div fxLayoutAlign="space-around center">
+        <mat-dialog-content>
+            <p>
+                <mat-form-field>
+                    <input #username="ngModel" matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username" required>
+                    <mat-error *ngIf="username.errors?.required">Username can't be null</mat-error>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <input #password="ngModel" matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password" required>
+                    <mat-error *ngIf="password.errors?.required">Password can't be null</mat-error>
+                </mat-form-field><br>
+                <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
+            </p>
+        </mat-dialog-content>
+
+    </div>
+    <a [routerLink]="" (click)="goToRegisterPage()" style="font-size: 15px;"><i>Not Registered Yet?</i></a>
+    <mat-dialog-actions>
+        <span class="flex-spacer"></span>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button type="submit" mat-button class="background-primary text-floral-white" [ngClass]="{'customclass': loginForm.form.invalid}" [disabled]="loginForm.form.invalid">Login</button>
+    </mat-dialog-actions>
+
+</form>
