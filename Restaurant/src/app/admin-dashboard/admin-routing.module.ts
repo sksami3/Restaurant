@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import{ProfileComponent} from './profile/profile.component';
-import{AdminComponent} from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
+
+
 
 
 
@@ -12,6 +14,7 @@ export const routes: Routes = [
         component: AdminComponent,
         children: [{ path: 'profile', component: ProfileComponent }]
     }
+    
 ];
 
 @NgModule({
@@ -20,6 +23,7 @@ export const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes)
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
         RouterModule
     ]
