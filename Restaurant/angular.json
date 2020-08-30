@@ -34,6 +34,26 @@
                                 "input": "src/app/admin-dashboard/@theme/styles/styles.scss",
                                 "bundleName": "adminTheme",
                                 "inject": false
+                            },
+                            {
+                                "input": "node_modules/bootstrap/dist/css/bootstrap.css",
+                                "bundleName": "adminBootstrap",
+                                "inject": false
+                            },
+                            {
+                                "input": "node_modules/typeface-exo/index.css",
+                                "bundleName": "adminIndex",
+                                "inject": false
+                            },
+                            {
+                                "input": "node_modules/ionicons/scss/ionicons.scss",
+                                "bundleName": "adminionIcons",
+                                "inject": false
+                            },
+                            {
+                                "input": "node_modules/socicon/css/socicon.css",
+                                "bundleName": "adminionSocicon",
+                                "inject": false
                             }
                         ],
                         "scripts": [

@@ -47,6 +47,17 @@ export class DishService
     .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
+  postDishe(dish : Dish):Observable<Dish>{
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.post<Dish>(baseURL + 'dishes/',dish,httpOptions)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
   //move this to comment service when created
   postComment(comment : Comment):Observable<Comment>{
     console.log(comment);

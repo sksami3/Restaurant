@@ -23,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import 'hammerjs';
 
-
+import { FileUploadModule } from 'ng2-file-upload';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
@@ -38,11 +38,29 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { CreateDishComponent } from './Dish/create-dish/create-dish.component';
+
+import {
+  NbActionsModule,
+  NbButtonModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbIconModule,
+  NbInputModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbUserModule,
+} from '@nebular/theme';
+
+import { FormsModule as ngFormsModule } from '@angular/forms';
+import { CreatePromotionComponent } from './Promotion/create-promotion/create-promotion.component';
+import { CreateLeadershipComponent } from './Leadership/create-leadership/create-leadership.component';
+
 
 
 
 @NgModule({
-  declarations: [ProfileComponent, AdminComponent],
+  declarations: [ProfileComponent, AdminComponent, CreateDishComponent, CreatePromotionComponent, CreateLeadershipComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -63,7 +81,7 @@ import {
     MatSelectModule
     ,MatProgressSpinnerModule
     ,MatSliderModule,
-
+    FileUploadModule,
     BrowserModule,
     HttpClientModule,
     NbSidebarModule.forRoot(),
@@ -77,6 +95,18 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+
+    NbInputModule,
+    NbCardModule,
+    NbButtonModule,
+    NbActionsModule,
+    NbUserModule,
+    NbCheckboxModule,
+    NbRadioModule,
+    NbDatepickerModule,
+    NbSelectModule,
+    NbIconModule,
+    ngFormsModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [

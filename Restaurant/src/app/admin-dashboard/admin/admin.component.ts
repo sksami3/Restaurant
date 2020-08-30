@@ -16,6 +16,10 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.document.getElementById('theme').setAttribute('href', 'adminTheme.css');
+    this.document.getElementById('adminBootstrap').setAttribute('href', 'adminBootstrap.css');
+    this.document.getElementById('adminIndex').setAttribute('href', 'adminIndex.css');
+    this.document.getElementById('adminionIcons').setAttribute('href', 'adminionIcons.css');
+    this.document.getElementById('adminionSocicon').setAttribute('href', 'adminionSocicon.css');
     this._menuService.getMenus().subscribe(res => this.menu = res, err => console.log(err));
   }
 

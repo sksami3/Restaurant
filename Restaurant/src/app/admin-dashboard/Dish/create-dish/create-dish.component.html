@@ -1,0 +1,74 @@
+<!-- <div class="row"> -->
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <!-- <div class="col-md-6"> -->
+    <div fxFlex="80">
+        <nb-card>
+            <nb-card-header><span class="add_task"></span>Add Dish</nb-card-header>
+            <nb-card-body>
+                <form #fform="ngForm" novalidate [formGroup]="dishForm" (ngSubmit)="onSubmit()">
+
+                    <div fxLayout="column" fxLayoutAlign="space-around center">
+                        <div class="form-group row">
+                            <div>
+                                <div class="profile-picture">
+                                    <div>
+                                        <img *ngIf="url" width=300 height=300 src="{{url}}" />
+                                        <label for="Image" ng2FileDrop [ngClass]="{'drag-over': hasDragOver}" (fileOver)="fileOver($event)" [uploader]="uploader">
+                                  <div class="infotext"><span *ngIf="!url" >Click to upload</span></div>
+                                </label>
+                                        <input type="file" ng2FileSelect [uploader]="uploader" id="Image" style="display:none" (change)="onSelectFile($event)" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Name" class="label col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" nbInput fullWidth formControlName="Name" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputCatagory" class="label col-sm-3 col-form-label">Catagory</label>
+                        <div class="col-sm-9">
+                            <input type="text" nbInput fullWidth formControlName="Catagory" placeholder="Catagory">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Label" class="label col-sm-3 col-form-label">Label</label>
+                        <div class="col-sm-9">
+                            <input type="text" nbInput fullWidth formControlName="Label" placeholder="Label">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Price" class="label col-sm-3 col-form-label">Price</label>
+                        <div class="col-sm-9">
+                            <input type="text" nbInput fullWidth formControlName="Price" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Description" class="label col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea rows="5" nbInput fullWidth shape="round" formControlName="Description" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Featured" class="col-sm-3 label">Is Featured</label>
+                        <div class="col-sm-9">
+                            <nb-checkbox-group>
+                                <nb-checkbox formControlName="Featured">Featured</nb-checkbox>
+                            </nb-checkbox-group>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-sm-3 col-sm-9">
+                            <button type="submit" nbButton status="primary">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
