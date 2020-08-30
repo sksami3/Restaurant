@@ -55,12 +55,23 @@ import {
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { CreatePromotionComponent } from './Promotion/create-promotion/create-promotion.component';
 import { CreateLeadershipComponent } from './Leadership/create-leadership/create-leadership.component';
+import { ShowDishComponent } from './Dish/show-dish/show-dish.component';
 
+
+import { NbTreeGridModule } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 
 @NgModule({
-  declarations: [ProfileComponent, AdminComponent, CreateDishComponent, CreatePromotionComponent, CreateLeadershipComponent],
+  declarations: [
+    ProfileComponent, 
+    AdminComponent, 
+    CreateDishComponent, 
+    CreatePromotionComponent, 
+    CreateLeadershipComponent, 
+    ShowDishComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -107,6 +118,11 @@ import { CreateLeadershipComponent } from './Leadership/create-leadership/create
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+
+    NbTreeGridModule,
+    NbInputModule,
+    Ng2SmartTableModule,
+
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [

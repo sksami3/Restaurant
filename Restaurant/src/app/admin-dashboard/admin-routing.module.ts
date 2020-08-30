@@ -6,6 +6,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CreateDishComponent } from './Dish/create-dish/create-dish.component';
 import { CreatePromotionComponent } from './Promotion/create-promotion/create-promotion.component';
 import { CreateLeadershipComponent } from './Leadership/create-leadership/create-leadership.component';
+import { ShowDishComponent } from './Dish/show-dish/show-dish.component';
 
 
 
@@ -15,13 +16,19 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
-        children: [{ 
-            path: 'profile', component: ProfileComponent }]
+        children: [{
+            path: 'profile', component: ProfileComponent
+        }]
     },
     {
         path: 'admin',
         component: AdminComponent,
         children: [{ path: 'createDish', component: CreateDishComponent }]
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        children: [{ path: 'showDishes', component: ShowDishComponent }]
     },
     {
         path: 'admin',
@@ -33,7 +40,7 @@ export const routes: Routes = [
         component: AdminComponent,
         children: [{ path: 'createLeadership', component: CreateLeadershipComponent }]
     }
-    
+
 ];
 
 @NgModule({
