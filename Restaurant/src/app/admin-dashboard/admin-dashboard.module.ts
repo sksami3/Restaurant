@@ -29,6 +29,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 
+import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -43,10 +47,7 @@ import { CreateDishComponent } from './Dish/create-dish/create-dish.component';
 import {
   NbActionsModule,
   NbButtonModule,
-  NbCardModule,
   NbCheckboxModule,
-  NbIconModule,
-  NbInputModule,
   NbRadioModule,
   NbSelectModule,
   NbUserModule,
@@ -58,8 +59,8 @@ import { CreateLeadershipComponent } from './Leadership/create-leadership/create
 import { ShowDishComponent } from './Dish/show-dish/show-dish.component';
 
 
-import { NbTreeGridModule } from '@nebular/theme';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ShowPromotionComponent } from './Promotion/show-promotion/show-promotion.component';
+import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leadership.component';
 
 
 
@@ -70,7 +71,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     CreateDishComponent, 
     CreatePromotionComponent, 
     CreateLeadershipComponent, 
-    ShowDishComponent
+    ShowDishComponent, 
+    ShowPromotionComponent,
+    ShowLeadershipComponent
   ],
   imports: [
     CommonModule,
@@ -120,9 +123,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     ngFormsModule,
 
     NbTreeGridModule,
-    NbInputModule,
     Ng2SmartTableModule,
-
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [

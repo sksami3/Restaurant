@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { PromotionService } from 'src/app/services/promotion.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
-import {Dish} from '../../../Shared/dish';
-import { DishService } from 'src/app/services/dish.service';
+import { Dish } from '../../../Shared/dish';
 
 @Component({
-  selector: 'app-show-dish',
-  templateUrl: './show-dish.component.html',
-  styleUrls: ['./show-dish.component.scss']
+  selector: 'app-show-promotion',
+  templateUrl: './show-promotion.component.html',
+  styleUrls: ['./show-promotion.component.scss']
 })
-export class ShowDishComponent implements OnInit {
-  //data : Array<Dish>;
+export class ShowPromotionComponent implements OnInit {
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -55,12 +54,12 @@ export class ShowDishComponent implements OnInit {
   };
 
   source: LocalDataSource = new LocalDataSource();
+  constructor(private _promotionService: PromotionService) {
+    this._promotionService.getPromotions().subscribe(res => this.source.load(res));
+  }
 
-  constructor(private _dishService: DishService) { 
-    //let data;
-    this._dishService.getDishes().subscribe(res => this.source.load(res));
-    //console.log(data);
-    //this.source.load(data);
+  ngOnInit(): void {
+
   }
 
   onDeleteConfirm(event): void {
@@ -69,9 +68,6 @@ export class ShowDishComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
-  }
-
-  ngOnInit(): void {
   }
 
 }

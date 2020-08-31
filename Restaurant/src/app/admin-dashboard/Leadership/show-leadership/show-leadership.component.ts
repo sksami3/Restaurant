@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
 import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableData } from '../../@core/data/smart-table';
-import {Dish} from '../../../Shared/dish';
-import { DishService } from 'src/app/services/dish.service';
+import { LeaderService } from 'src/app/services/leader.service';
 
 @Component({
-  selector: 'app-show-dish',
-  templateUrl: './show-dish.component.html',
-  styleUrls: ['./show-dish.component.scss']
+  selector: 'app-show-leadership',
+  templateUrl: './show-leadership.component.html',
+  styleUrls: ['./show-leadership.component.scss']
 })
-export class ShowDishComponent implements OnInit {
-  //data : Array<Dish>;
+export class ShowLeadershipComponent implements OnInit {
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -35,16 +33,12 @@ export class ShowDishComponent implements OnInit {
         title: 'Name',
         type: 'string',
       },
-      catagory: {
-        title: 'Catagory',
+      designation: {
+        title: 'Designation',
         type: 'string',
       },
-      label: {
-        title: 'Label',
-        type: 'string',
-      },
-      price: {
-        title: 'Price',
+      abbr: {
+        title: 'Abbr',
         type: 'string',
       },
       description: {
@@ -52,15 +46,15 @@ export class ShowDishComponent implements OnInit {
         type: 'string',
       },
     },
-  };
+    };
 
   source: LocalDataSource = new LocalDataSource();
+  constructor(private _leaderService: LeaderService) {
+    this._leaderService.getLeaders().subscribe(res => {console.log(res);this.source.load(res);});
+  }
 
-  constructor(private _dishService: DishService) { 
-    //let data;
-    this._dishService.getDishes().subscribe(res => this.source.load(res));
-    //console.log(data);
-    //this.source.load(data);
+  ngOnInit(): void {
+
   }
 
   onDeleteConfirm(event): void {
@@ -70,8 +64,6 @@ export class ShowDishComponent implements OnInit {
       event.confirm.reject();
     }
   }
-
-  ngOnInit(): void {
-  }
-
 }
+
+

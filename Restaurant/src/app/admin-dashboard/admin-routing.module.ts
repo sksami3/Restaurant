@@ -7,6 +7,8 @@ import { CreateDishComponent } from './Dish/create-dish/create-dish.component';
 import { CreatePromotionComponent } from './Promotion/create-promotion/create-promotion.component';
 import { CreateLeadershipComponent } from './Leadership/create-leadership/create-leadership.component';
 import { ShowDishComponent } from './Dish/show-dish/show-dish.component';
+import { ShowPromotionComponent } from './Promotion/show-promotion/show-promotion.component';
+import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leadership.component';
 
 
 
@@ -38,8 +40,18 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        children: [{ path: 'showPromotions', component: ShowPromotionComponent }]
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
         children: [{ path: 'createLeadership', component: CreateLeadershipComponent }]
-    }
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        children: [{ path: 'showLeaderships', component: ShowLeadershipComponent }]
+    },
 
 ];
 
