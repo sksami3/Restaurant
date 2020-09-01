@@ -23,6 +23,10 @@ export class DishService
     return this.http.get<Dish>(baseURL+'dishes/' +id).pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
+  deleteDish(id : string) : Observable<Dish>{
+    return this.http.delete <Dish>(baseURL+'dishes/' +id).pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
   getFeatured() : Observable<Dish>{
     return this.http.get<Dish>(baseURL+'dishes?featured=true').pipe(map(dishes => dishes[0])).pipe(catchError(this.processHTTPMsgService.handleError));
   }

@@ -20,6 +20,9 @@ export class PromotionService {
   getPromotion(id : string) : Observable<Promotion>{
     return this.http.get<Promotion>(baseURL+'promotions/'+id).pipe(catchError(this.ProcessHTTPMsgService.handleError));
   }
+  deletePromotion(id : string) : Observable<Promotion>{
+    return this.http.delete<Promotion>(baseURL+'promotions/'+id).pipe(catchError(this.ProcessHTTPMsgService.handleError));
+  }
   getFeatured() : Observable<Promotion>{
     return this.http.get<Promotion>(baseURL+'promotions?featured=true')
     .pipe(map((promotions) => promotions[0])).pipe(catchError(this.ProcessHTTPMsgService.handleError));

@@ -64,7 +64,14 @@ export class ShowPromotionComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      new Promise((resolve, reject) => {
+        this._promotionService.deletePromotion(event.data.id) //delete promotion
+          .subscribe(res => resolve(res), err => reject(err))
+      }).then(() => {
+        event.confirm.resolve();
+      }).catch(err =>
+        console.log(err)
+      );
     } else {
       event.confirm.reject();
     }

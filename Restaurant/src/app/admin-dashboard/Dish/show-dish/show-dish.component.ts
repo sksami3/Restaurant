@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
-import {Dish} from '../../../Shared/dish';
+import { Dish } from '../../../Shared/dish';
 import { DishService } from 'src/app/services/dish.service';
 
 @Component({
@@ -56,7 +56,7 @@ export class ShowDishComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private _dishService: DishService) { 
+  constructor(private _dishService: DishService) {
     //let data;
     this._dishService.getDishes().subscribe(res => this.source.load(res));
     //console.log(data);
@@ -65,7 +65,15 @@ export class ShowDishComponent implements OnInit {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      new Promise((resolve, reject) => {
+        this._dishService.deleteDish(event.data.id)
+          .subscribe(res => resolve(res), err => reject(err))
+      }).then(() => {
+        event.confirm.resolve();
+      }).catch(err =>
+        console.log(err)
+      );
+
     } else {
       event.confirm.reject();
     }

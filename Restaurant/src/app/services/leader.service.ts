@@ -24,6 +24,10 @@ export class LeaderService {
     return this.http.get<Leader>(baseURL+'leadership/'+id).pipe(catchError(this.ProcessHTTPMsgService.handleError));
   }
 
+  deleteLeader(id : string): Observable<Leader>{
+    return this.http.delete<Leader>(baseURL+'leadership/'+id).pipe(catchError(this.ProcessHTTPMsgService.handleError));
+  }
+
   getFeatured(): Observable<Leader>
   {
     return this.http.get<Leader>(baseURL+'leadership?featured=true').pipe(map((leaders) => leaders[0])).pipe(catchError(this.ProcessHTTPMsgService.handleError));
