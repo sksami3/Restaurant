@@ -72,3 +72,8 @@ $mat-card-header-size: 50px !default;
 .bccolor {
     background-color: $lt-gray;
 }
+
+//table filter off
+tr.ng2-smart-filters {
+    visibility: collapse !important;
+}

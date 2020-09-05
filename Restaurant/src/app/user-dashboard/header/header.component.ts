@@ -4,6 +4,8 @@ import { LoginComponent } from '../login/login.component';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from 'src/app/Shared/JWTModels/user';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { NbDialogService } from '@nebular/theme';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,13 @@ export class HeaderComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   isLoggedIn: boolean;
   user: User;
-  constructor(public dialog: MatDialog, private auth: AuthenticationService, @Inject('BaseURL') private BaseURL) { }
+  constructor(
+    public dialogRef: MatDialogRef<LoginComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogga: MatDialog, private auth: AuthenticationService, 
+    @Inject('BaseURL') private BaseURL,
+    private dialogService: NbDialogService,
+    private router: Router) { }
 
   ngOnInit(): void {
     if (this.auth.userValue) {
@@ -26,9 +34,26 @@ export class HeaderComponent implements OnInit {
   }
 
   openLoginForm(): void {
-    const loginPop = this.dialog.open(LoginComponent, { width: '500px', height: '450px' });
-    console.log(loginPop);
+    //const loginPop = this.dialogga.open(LoginComponent, { width: '500px', height: '450px' });
+    
+    this.router.navigate(['/login']);
+    
   }
+
+  // openLoginForm(): void{
+  //   try{
+  //     //const something = this.dialogga.open(LoginComponent,{width:'500px', height:'450px'});
+  //     this.dialogService.open(LoginOverlayComponent, {
+  //       context: {
+  //         title: 'This is a title passed to the dialog component',
+  //       },
+  //     });
+  //   }
+  //   catch(Error){
+  //     console.log(Error);
+  //   };
+    
+  // }
 
   logout(): void {
     console.log("logout button working");

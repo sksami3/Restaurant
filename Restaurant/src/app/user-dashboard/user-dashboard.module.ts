@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 
 import {MatMenuModule} from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog'; 
+
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import { FormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material/input'; 
@@ -41,15 +42,16 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   declarations: [
     MenuComponent,
     DishdetailComponent,
-    HeaderComponent,
+    
     FooterComponent,
     AboutComponent,
     HomeComponent,
     ContactComponent,
     LoginComponent,
+    HeaderComponent,
     UserComponent,
     HighliteDirective,
-    UserProfileComponent
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -76,9 +78,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ,FileUploadModule
   ],
   entryComponents:[
-    LoginComponent
+    //LoginComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
+  ],
   exports: [
     UserComponent
   ]

@@ -26,7 +26,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-       
+
         return this.http.post<any>(`${baseURL}users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -37,9 +37,17 @@ export class AuthenticationService {
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
-        this.router.navigate(['/']);
+        if (this.userValue.role == 'Admin') {
+            localStorage.removeItem('user');
+            this.userSubject.next(null);
+            this.router.navigate(['/login']);
+        }
+        else {
+            // remove user from local storage to log user out
+            localStorage.removeItem('user');
+            this.userSubject.next(null);
+            this.router.navigate(['/']);
+        }
+
     }
 }

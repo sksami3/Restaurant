@@ -23,18 +23,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  goToRegisterPage():void{
+  goToRegisterPage(): void {
     this.router.navigateByUrl('/createProfile');
     this.dialogRef.close();
   }
   onSubmit() {
     //console.log('User: ', this.user);
-    this.dialogRef.close();
+    //this.dialogRef.close();
     this.authenticationService.login(this.user.username, this.user.password)
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/menu']);
+          if (data.role == 'Admin')
+            this.router.navigate(['/admin/showDishes']);
+          else
+            this.router.navigate(['/menu']);
         },
         error => {
           this.error = error;

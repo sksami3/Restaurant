@@ -9,6 +9,7 @@ import { MenuComponent } from '../user-dashboard/menu/menu.component';
 import { DishdetailComponent } from '../user-dashboard/dishdetail/dishdetail.component';
 import { UserComponent } from '../user-dashboard/user/user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -38,6 +39,10 @@ export const routes: Routes = [
     {
         path: 'createProfile', component: UserComponent,
         children: [{ path: '', component: UserProfileComponent }]
+    },
+    {
+        path: 'login', component: LoginComponent,
+        //children: [{ path: '', component: LoginComponent }]
     },
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
