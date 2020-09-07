@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { UserService } from 'src/app/services/user.service';
 import { Promotion } from 'src/app/shared/promotion';
+import { TosterService } from 'src/app/services/toster.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-promotion',
@@ -32,7 +34,11 @@ export class CreatePromotionComponent implements OnInit {
   public progress: number;
   public message: string;
 
-  constructor(private fb: FormBuilder, private _promotionService: PromotionService,private userService: UserService) { 
+  constructor(private fb: FormBuilder,
+    private _promotionService: PromotionService,
+    private userService: UserService,
+    private _tosterService: TosterService,
+    private router: Router) {
     this.createFormGroup();
   }
 
@@ -87,15 +93,15 @@ export class CreatePromotionComponent implements OnInit {
 
     'Label': {
       'required': 'Label is required.',
-      
+
     },
     'Price': {
       'required': 'Price is required.',
-     
+
     },
     'Description': {
       'required': 'Description is required.',
-     
+
     }
   };
 
@@ -141,10 +147,22 @@ export class CreatePromotionComponent implements OnInit {
       }).then((value) => {
         this.promotion.image = value;
         console.log(this.promotion);
-        this._promotionService.postPromotion(this.promotion).subscribe(res => returnObj = res, err => this.message = err);
+        this._promotionService.postPromotion(this.promotion).subscribe(
+          res => {
+            returnObj = res;
+            this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
+            setTimeout(() => {
+              this.router.navigate(['admin/showDishes']);
+            }, 3000);
+          },
+          err => {
+            this.message = err;
+            this._tosterService.showToast('danger', 'Error!!', err.message);
+          });
       }).catch(err => {
         console.log(err);
         this.message = err.message;
+        this._tosterService.showToast('danger', 'Error!!', err.message);
       }
       );
 
@@ -152,7 +170,16 @@ export class CreatePromotionComponent implements OnInit {
     }
     else {
       //error pop
-      this._promotionService.postPromotion(this.promotion).subscribe(res => returnObj = res, err => this.message = err);
+      this._promotionService.postPromotion(this.promotion).subscribe(res => {
+        returnObj = res;
+        this._tosterService.showToast('warning', 'Warning!!', 'Created without Photo');
+        setTimeout(() => {
+          this.router.navigate(['admin/showPromotions']);
+        }, 3000);
+      }, err => {
+        this.message = err;
+        this._tosterService.showToast('danger', 'Error!!', err.message);
+      });
     }
   }
 

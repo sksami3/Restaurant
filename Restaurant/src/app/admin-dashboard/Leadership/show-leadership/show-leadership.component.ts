@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LocalDataSource } from 'ng2-smart-table';
 import { LeaderService } from 'src/app/services/leader.service';
+import { TosterService } from 'src/app/services/toster.service';
 
 @Component({
   selector: 'app-show-leadership',
@@ -49,7 +50,7 @@ export class ShowLeadershipComponent implements OnInit {
     };
 
   source: LocalDataSource = new LocalDataSource();
-  constructor(private _leaderService: LeaderService) {
+  constructor(private _leaderService: LeaderService,private _tosterService: TosterService) {
     this._leaderService.getLeaders().subscribe(res => {console.log(res);this.source.load(res);});
   }
 
@@ -64,8 +65,10 @@ export class ShowLeadershipComponent implements OnInit {
           .subscribe(res => resolve(res), err => reject(err))
       }).then(() => {
         event.confirm.resolve();
+        this._tosterService.showToast('success', 'Congratulations!!', 'Deleted Successfully');
       }).catch(err =>
-        console.log(err)
+        {console.log(err);
+        this._tosterService.showToast('danger', 'Error!!', err.message);}
       );
       
     } else {

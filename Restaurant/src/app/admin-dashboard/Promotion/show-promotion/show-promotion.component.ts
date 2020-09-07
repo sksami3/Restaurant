@@ -3,6 +3,7 @@ import { PromotionService } from 'src/app/services/promotion.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { Dish } from '../../../Shared/dish';
+import { TosterService } from 'src/app/services/toster.service';
 
 @Component({
   selector: 'app-show-promotion',
@@ -54,7 +55,7 @@ export class ShowPromotionComponent implements OnInit {
   };
 
   source: LocalDataSource = new LocalDataSource();
-  constructor(private _promotionService: PromotionService) {
+  constructor(private _promotionService: PromotionService,private _tosterService: TosterService) {
     this._promotionService.getPromotions().subscribe(res => this.source.load(res));
   }
 
@@ -69,11 +70,16 @@ export class ShowPromotionComponent implements OnInit {
           .subscribe(res => resolve(res), err => reject(err))
       }).then(() => {
         event.confirm.resolve();
+        this._tosterService.showToast('success', 'Congratulations!!', 'Deleted Successfully');
       }).catch(err =>
-        console.log(err)
+        {
+          console.log(err);
+        this._tosterService.showToast('danger', 'Error!!', err.message);
+      }
       );
     } else {
       event.confirm.reject();
+      
     }
   }
 

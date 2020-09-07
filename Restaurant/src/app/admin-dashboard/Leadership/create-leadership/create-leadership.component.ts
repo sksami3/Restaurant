@@ -4,6 +4,8 @@ import { LeaderService } from 'src/app/services/leader.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Leader } from 'src/app/Shared/leader';
+import { TosterService } from 'src/app/services/toster.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-leadership',
@@ -30,7 +32,11 @@ export class CreateLeadershipComponent implements OnInit {
   fileToUpload: any;
   public progress: number;
   public message: string;
-  constructor(private fb: FormBuilder, private _leadershipService: LeaderService,private userService: UserService) { 
+  constructor(private fb: FormBuilder,
+    private _leadershipService: LeaderService,
+    private userService: UserService,
+    private _tosterService: TosterService,
+    private router: Router) {
     this.createFormGroup();
   }
 
@@ -84,15 +90,15 @@ export class CreateLeadershipComponent implements OnInit {
 
     'Abbr': {
       'required': 'Abbr is required.',
-      
+
     },
     'Designation': {
       'required': 'Designation is required.',
-     
+
     },
     'Description': {
       'required': 'Description is required.',
-     
+
     }
   };
 
@@ -138,10 +144,20 @@ export class CreateLeadershipComponent implements OnInit {
       }).then((value) => {
         this.leadership.image = value;
         console.log(this.leadership);
-        this._leadershipService.postLeader(this.leadership).subscribe(res => returnObj = res, err => this.message = err);
+        this._leadershipService.postLeader(this.leadership).subscribe(res => {
+          returnObj = res;
+          this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
+          setTimeout(() => {
+            this.router.navigate(['admin/showLeaderships']);
+        }, 3000);
+        }, err => {
+          this.message = err;
+          this._tosterService.showToast('danger', 'Error!!', err.message);
+        });
       }).catch(err => {
         console.log(err);
         this.message = err.message;
+        this._tosterService.showToast('danger', 'Error!!', err.message);
       }
       );
 
@@ -149,7 +165,10 @@ export class CreateLeadershipComponent implements OnInit {
     }
     else {
       //error pop
-      this._leadershipService.postLeader(this.leadership).subscribe(res => returnObj = res, err => this.message = err);
+      this._leadershipService.postLeader(this.leadership).subscribe(res => 
+        {returnObj = res;this._tosterService.showToast('warning', 'Warning!!', 'Created without Photo');}, 
+        err => {this.message = err;this._tosterService.showToast('danger', 'Error!!', err.message);});
+      
     }
   }
 

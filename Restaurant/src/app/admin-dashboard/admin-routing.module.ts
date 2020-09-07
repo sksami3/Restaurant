@@ -19,6 +19,13 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminComponent,
         children: [{
+            path: '', component: ShowDishComponent
+        }]
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        children: [{
             path: 'profile', component: ProfileComponent
         }]
     },

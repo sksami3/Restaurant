@@ -5,6 +5,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Dish } from 'src/app/shared/dish';
 import { DishService } from 'src/app/services/dish.service';
 import { UserService } from 'src/app/services/user.service';
+import { TosterService } from 'src/app/services/toster.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-dish',
@@ -35,10 +38,16 @@ export class CreateDishComponent implements OnInit {
   public progress: number;
   public message: string;
 
+  
+
   constructor(@Inject(DOCUMENT) private document,
-  private fb: FormBuilder, private _dishService: DishService,private userService: UserService) {
+    private fb: FormBuilder,
+    private _dishService: DishService, private userService: UserService,
+    private _tosterService: TosterService,
+    private router: Router
+  ) {
     this.createFormGroup();
-   }
+  }
 
   ngOnInit(): void {
     this.dishForm.valueChanges.subscribe((data) => this.onValueChange(data));
@@ -49,7 +58,7 @@ export class CreateDishComponent implements OnInit {
     this.hasDragOver = e;
   }
 
-  
+
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -98,15 +107,15 @@ export class CreateDishComponent implements OnInit {
     },
     'Label': {
       'required': 'Label is required.',
-      
+
     },
     'Price': {
       'required': 'Price is required.',
-     
+
     },
     'Description': {
       'required': 'Description is required.',
-     
+
     }
   };
 
@@ -152,18 +161,42 @@ export class CreateDishComponent implements OnInit {
       }).then((value) => {
         this.dish.image = value;
         console.log(this.dish);
-        this._dishService.postDishe(this.dish).subscribe(res => returnObj = res, err => this.message = err);
+        this._dishService.postDishe(this.dish).subscribe(
+          res => {
+            returnObj = res;
+            new Promise<any>((resolve, reject) => {
+              this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
+            })
+            
+            setTimeout(() => {
+              this.router.navigate(['admin/showDishes']);
+          }, 3000);  //5s
+          },
+          err => {
+            this.message = err;
+            this._tosterService.showToast('danger', 'Error!!', err.message);
+          }
+        );
+        
       }).catch(err => {
         console.log(err);
         this.message = err.message;
+        this._tosterService.showToast('danger', 'Error!!', err.message);
       }
       );
-
-      console.log(something);
     }
     else {
       //error pop
-      this._dishService.postDishe(this.dish).subscribe(res => returnObj = res, err => this.message = err);
+      this._dishService.postDishe(this.dish).subscribe(res => {
+        returnObj = res;
+        this._tosterService.showToast('warning', 'Warning!!', 'Created without Photo');
+        setTimeout(() => {
+          this.router.navigate(['admin/showDishes']);
+      }, 3000); 
+      }, err => {
+        this.message = err;
+        this._tosterService.showToast('danger', 'Error!!', err.message);
+      });
     }
   }
 

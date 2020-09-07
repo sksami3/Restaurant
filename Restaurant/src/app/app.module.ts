@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { baseURL } from './Shared/baseurl';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { DishService } from './services/dish.service';
+import { TosterService } from './services/toster.service';
 
 import { FeedbackService } from './services/feedback.service';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
@@ -50,6 +51,7 @@ import {ErrorInterceptor} from './helper/error.interceptor';
     LeaderService,
     ProcessHTTPMsgService,
     FeedbackService,
+    TosterService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: 'BaseURL', useValue: baseURL },

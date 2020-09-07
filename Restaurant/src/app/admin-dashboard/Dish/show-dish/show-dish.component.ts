@@ -3,6 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { Dish } from '../../../Shared/dish';
 import { DishService } from 'src/app/services/dish.service';
+import { TosterService } from 'src/app/services/toster.service';
 
 @Component({
   selector: 'app-show-dish',
@@ -56,7 +57,7 @@ export class ShowDishComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private _dishService: DishService) {
+  constructor(private _dishService: DishService,private _tosterService: TosterService) {
     //let data;
     this._dishService.getDishes().subscribe(res => this.source.load(res));
     //console.log(data);
@@ -67,11 +68,15 @@ export class ShowDishComponent implements OnInit {
     if (window.confirm('Are you sure you want to delete?')) {
       new Promise((resolve, reject) => {
         this._dishService.deleteDish(event.data.id)
-          .subscribe(res => resolve(res), err => reject(err))
+          .subscribe(res => {resolve(res); this._tosterService.showToast('success', 'Congratulations!!', 'Deleted Successfully');}, err => reject(err))
       }).then(() => {
         event.confirm.resolve();
+       
       }).catch(err =>
-        console.log(err)
+        {
+          console.log(err);
+          this._tosterService.showToast('danger', 'Error!!', err.message);
+        }
       );
 
     } else {
