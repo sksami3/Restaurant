@@ -7,6 +7,7 @@ import { FeedbackService } from '../../services/feedback.service';
 import { expand } from '../../animations/app.animation';
 
 
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -25,6 +26,10 @@ export class ContactComponent implements OnInit {
   feedBackErrorMsg: string;
   waitFor5Sec: boolean = false;
   runSpinner: boolean = false;
+  //map
+  title = 'Map Of Our Location';
+  lat = 23.824273;
+  lng = 90.365513;
 
   constructor(private fb: FormBuilder, private _feedbackService: FeedbackService) {
     this.createFormGroup();

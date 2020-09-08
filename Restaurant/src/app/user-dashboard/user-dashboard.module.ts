@@ -37,6 +37,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { HighliteDirective } from '../directives/highlite.directive';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AccountHeaderComponent } from './account-header/account-header.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -78,6 +79,9 @@ import { AccountHeaderComponent } from './account-header/account-header.componen
     ,MatIconModule
     ,UserRoutingModule
     ,FileUploadModule
+    ,AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   entryComponents:[
     //LoginComponent
