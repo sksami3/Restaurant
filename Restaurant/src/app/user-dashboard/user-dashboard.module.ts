@@ -36,6 +36,7 @@ import { UserRoutingModule } from './user-routing.module';
 
 import { HighliteDirective } from '../directives/highlite.directive';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AccountHeaderComponent } from './account-header/account-header.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserComponent,
     HighliteDirective,
     UserProfileComponent,
+    AccountHeaderComponent,
   ],
   imports: [
     CommonModule,

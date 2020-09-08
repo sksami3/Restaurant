@@ -61,6 +61,9 @@ import { ShowDishComponent } from './Dish/show-dish/show-dish.component';
 
 import { ShowPromotionComponent } from './Promotion/show-promotion/show-promotion.component';
 import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leadership.component';
+import { EditDishComponent } from './Dish/edit-dish/edit-dish.component';
+import { EditLeadershipComponent } from './Leadership/edit-leadership/edit-leadership.component';
+import { EditPromotionComponent } from './Promotion/edit-promotion/edit-promotion.component';
 
 
 
@@ -73,7 +76,10 @@ import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leade
     CreateLeadershipComponent, 
     ShowDishComponent, 
     ShowPromotionComponent,
-    ShowLeadershipComponent
+    ShowLeadershipComponent,
+    EditDishComponent,
+    EditLeadershipComponent,
+    EditPromotionComponent
   ],
   imports: [
     CommonModule,
@@ -124,6 +130,9 @@ import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leade
 
     NbTreeGridModule,
     Ng2SmartTableModule,
+  ],
+  entryComponents:[
+    EditDishComponent,EditLeadershipComponent,EditPromotionComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [

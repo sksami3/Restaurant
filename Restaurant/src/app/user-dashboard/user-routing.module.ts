@@ -37,8 +37,8 @@ export const routes: Routes = [
         children: [{ path: '', component: DishdetailComponent }]
     },
     {
-        path: 'createProfile', component: UserComponent,
-        children: [{ path: '', component: UserProfileComponent }]
+        path: 'createProfile', component: UserProfileComponent,
+        //children: [{ path: '', component: UserProfileComponent }]
     },
     {
         path: 'login', component: LoginComponent,

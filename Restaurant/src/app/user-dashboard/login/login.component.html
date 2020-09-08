@@ -30,9 +30,29 @@
     </mat-dialog-actions>
 
 </form> -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+
+        <h1 routerLink='/home'>Developer's Restaurant</h1>
+        <span class="menu-spacer"></span>
+        <div>
+            <a mat-button [routerLink]="'/createProfile'"> Not registered yet? </a>
+            <a mat-button [routerLink]="'/'"> Home </a>
+            <!-- <a mat-button [routerLink]="'/contacts'"> Contacts </a>
+            <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+            <a mat-button [routerLink]="'/activities'"> Activities </a>
+            <a mat-button [routerLink]="'/create-activity'"> Create Activity </a> -->
+
+        </div>
+    </mat-toolbar-row>
+
+    <!-- <mat-toolbar-row>
+        <span style="font-size: 12px;">Create your profile</span>
+    </mat-toolbar-row> -->
+</mat-toolbar>
 
 <body>
-    <!-- <div fxLayout="column" fxLayoutAlign="space-around center"> -->
+
     <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
         <mat-card class="box">
@@ -56,7 +76,9 @@
                     </mat-form-field>
                 </mat-card-content>
                 <button mat-stroked-button color="primary" class="btn-block" type="submit" [disabled]="loginForm.form.invalid">Log in</button>
-            </form>
+            </form><br>
+            <!-- <a [routerLink]="" (click)="goToRegisterPage()" style="font-size: 15px;"><i>Not Registered Yet?</i></a><br>
+            <a [routerLink]="" (click)="goToHomePage()" style="font-size: 15px;"><i>Back to Home</i></a><br> -->
         </mat-card>
 
     </div>

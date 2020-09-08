@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable,NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -14,7 +14,8 @@ export class AuthenticationService {
 
     constructor(
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private ngZone: NgZone
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -40,7 +41,8 @@ export class AuthenticationService {
         if (this.userValue.role == 'Admin') {
             localStorage.removeItem('user');
             this.userSubject.next(null);
-            this.router.navigate(['/login']);
+            // this.router.navigate(['/login']);
+            this.ngZone.run(() => this.router.navigate(['/login']))
         }
         else {
             // remove user from local storage to log user out

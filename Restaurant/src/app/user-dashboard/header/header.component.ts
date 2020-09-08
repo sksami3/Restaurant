@@ -23,11 +23,14 @@ export class HeaderComponent implements OnInit {
     @Inject('BaseURL') private BaseURL,
     private dialogService: NbDialogService,
     private router: Router) { }
-
+    isAdmin:boolean = false;
   ngOnInit(): void {
     if (this.auth.userValue) {
       if (!this.user){
         this.user = this.auth.userValue;
+        if(this.user.role == 'Admin'){
+          this.isAdmin = true;
+        }
       }
       this.isLoggedIn = true;
     }
