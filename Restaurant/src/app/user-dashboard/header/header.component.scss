@@ -3,19 +3,31 @@ $background-dark: #512DA8;
 $background-light: #9575CD;
 $background-pale: #D1C4E9;
 $background-moredark: #4527A0;
-
 @mixin zero-margin($pad-up-down, $pad-left-right) {
     margin: 0px auto;
     padding: $pad-up-down $pad-left-right;
 }
 
 .jumbotron {
-    @include zero-margin(70px,30px);
-    background: $background-light ;
-    color:floralwhite;
+    @include zero-margin(70px, 30px);
+    background: $background-light;
+    color: floralwhite;
     min-height: 150px;
+    //dsfaf
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    min-height: 150px;
+    background: url('../../../assets/header.gif') no-repeat center center fixed;
 }
 
-.active{
+.active {
     background: $background-moredark;
+}
+
+.toolbarWithBackgroundImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/header.gif') no-repeat center center fixed;
 }
