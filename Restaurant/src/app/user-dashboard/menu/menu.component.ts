@@ -22,9 +22,13 @@ import { controlInOutWithFlyingAnimation,expand } from '../../animations/app.ani
 
 export class MenuComponent implements OnInit {
 
+  data = [];
   dishes: Array<Dish>;
   menuErrMsg: string;
   //selectedDish: Dish;
+  page = 0;
+  size = 4;
+
 
 
   constructor(private dishService: DishService,
@@ -37,7 +41,32 @@ export class MenuComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.dishService.getDishes().subscribe((d) => this.dishes = d, errorM => this.menuErrMsg = errorM);
-  }
 
+      this.dishService.getDishes().subscribe((d) => 
+      {
+        this.dishes = d;
+        this.getDataWithPagination({pageIndex: this.page, pageSize: this.size, dishess:d });}, 
+      errorM => this.menuErrMsg = errorM
+      );
+      
+
+    
+  }
+getDataWithPagination(obj) {
+    let index=0,
+        startingIndex=obj.pageIndex * obj.pageSize,
+        endingIndex=startingIndex + obj.pageSize;
+    if(obj.dishess){
+      this.data = obj.dishess.filter(() => {
+        index++;
+        return (index > startingIndex && index <= endingIndex) ? true : false;
+      });
+    }else{
+      this.data = this.dishes.filter(() => {
+        index++;
+        return (index > startingIndex && index <= endingIndex) ? true : false;
+      });
+    }
+    
+  }
 }

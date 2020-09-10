@@ -30,6 +30,7 @@
                         "extractCss": true,
                         "styles": [
                             "src/styles.scss",
+                            "node_modules/ngx-toastr/toastr.css",
                             {
                                 "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
                             },

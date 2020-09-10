@@ -37,8 +37,10 @@ export class CreateDishComponent implements OnInit {
   fileToUpload: any;
   public progress: number;
   public message: string;
-
-  
+  disableButton:boolean = false;
+  loadingLargeGroup = false;
+  loadingMediumGroup = false;
+  loading = false;
 
   constructor(@Inject(DOCUMENT) private document,
     private fb: FormBuilder,
@@ -141,6 +143,8 @@ export class CreateDishComponent implements OnInit {
 
 
   onSubmit = () => {
+    this.loadingMediumGroup = true;
+
     var returnObj: Dish;
     // if (this.userDetailsForm.valid) {
     this.dish = this.dishForm.value;
@@ -153,7 +157,12 @@ export class CreateDishComponent implements OnInit {
 
       var something = new Promise<any>((resolve, reject) => {
         try {
-          this.userService.uploadImage(formData).subscribe(f => { console.log(f); resolve(f); }, errMSG => { reject(errMSG) });
+          this.userService.uploadImage(formData).subscribe(f => { 
+            console.log(f); 
+            resolve(f); 
+          }, errMSG => { 
+            reject(errMSG);
+          });
         }
         catch (Error) {
           alert(Error);
@@ -163,6 +172,7 @@ export class CreateDishComponent implements OnInit {
         console.log(this.dish);
         this._dishService.postDishe(this.dish).subscribe(
           res => {
+            this.disableButton = true;
             returnObj = res;
             new Promise<any>((resolve, reject) => {
               this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
@@ -173,12 +183,14 @@ export class CreateDishComponent implements OnInit {
           }, 3000);  //5s
           },
           err => {
+            this.disableButton = false;
             this.message = err;
             this._tosterService.showToast('danger', 'Error!!', err.message);
           }
         );
         
       }).catch(err => {
+        this.disableButton = false;
         console.log(err);
         this.message = err.message;
         this._tosterService.showToast('danger', 'Error!!', err.message);
@@ -198,6 +210,18 @@ export class CreateDishComponent implements OnInit {
         this._tosterService.showToast('danger', 'Error!!', err.message);
       });
     }
+  }
+
+  toggleLoadingLargeGroupAnimation() {
+    this.loadingLargeGroup = true;
+
+    //setTimeout(() => this.loadingLargeGroup = false, 3000);
+  }
+
+  toggleLoadingMediumGroupAnimation() {
+    this.loadingMediumGroup = true;
+
+    //setTimeout(() => this.loadingMediumGroup = false, 3000);
   }
 
 }

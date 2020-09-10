@@ -38,6 +38,8 @@ import { HighliteDirective } from '../directives/highlite.directive';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AccountHeaderComponent } from './account-header/account-header.component';
 import { AgmCoreModule } from '@agm/core';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -81,7 +83,9 @@ import { AgmCoreModule } from '@agm/core';
     ,FileUploadModule
     ,AgmCoreModule.forRoot({
       apiKey: ''
-    })
+    }),
+    MatPaginatorModule,
+    ToastrModule.forRoot()
   ],
   entryComponents:[
     //LoginComponent

@@ -14,15 +14,13 @@ export class AuthenticationService {
 
     constructor(
         private router: Router,
-        private http: HttpClient,
-        private ngZone: NgZone
+        private http: HttpClient
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
 
     public get userValue(): User {
-        console.log(this.userSubject.value);
         return this.userSubject.value;
     }
 
@@ -42,7 +40,7 @@ export class AuthenticationService {
             localStorage.removeItem('user');
             this.userSubject.next(null);
             // this.router.navigate(['/login']);
-            this.ngZone.run(() => this.router.navigate(['/login']))
+            this.router.navigate(['/login']);
         }
         else {
             // remove user from local storage to log user out

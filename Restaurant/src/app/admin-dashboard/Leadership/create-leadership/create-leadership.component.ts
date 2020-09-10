@@ -16,6 +16,11 @@ export class CreateLeadershipComponent implements OnInit {
   leadershipForm: FormGroup;
   leadership: Leader;
 
+  disableButton: boolean = false;
+  loadingLargeGroup = false;
+  loadingMediumGroup = false;
+  loading = false;
+
   public uploader: FileUploader;
   hasDragOver = false;
 
@@ -48,7 +53,17 @@ export class CreateLeadershipComponent implements OnInit {
   public fileOver(e: any): void {
     this.hasDragOver = e;
   }
+  toggleLoadingLargeGroupAnimation() {
+    this.loadingLargeGroup = true;
 
+    //setTimeout(() => this.loadingLargeGroup = false, 3000);
+  }
+
+  toggleLoadingMediumGroupAnimation() {
+    this.loadingMediumGroup = true;
+
+    //setTimeout(() => this.loadingMediumGroup = false, 3000);
+  }
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -142,6 +157,7 @@ export class CreateLeadershipComponent implements OnInit {
           alert(Error);
         }
       }).then((value) => {
+        this.disableButton = true;
         this.leadership.image = value;
         console.log(this.leadership);
         this._leadershipService.postLeader(this.leadership).subscribe(res => {
@@ -149,12 +165,14 @@ export class CreateLeadershipComponent implements OnInit {
           this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
           setTimeout(() => {
             this.router.navigate(['admin/showLeaderships']);
-        }, 3000);
+          }, 3000);
         }, err => {
+          this.disableButton = false;
           this.message = err;
           this._tosterService.showToast('danger', 'Error!!', err.message);
         });
       }).catch(err => {
+        this.disableButton = false;
         console.log(err);
         this.message = err.message;
         this._tosterService.showToast('danger', 'Error!!', err.message);
@@ -165,10 +183,15 @@ export class CreateLeadershipComponent implements OnInit {
     }
     else {
       //error pop
-      this._leadershipService.postLeader(this.leadership).subscribe(res => 
-        {returnObj = res;this._tosterService.showToast('warning', 'Warning!!', 'Created without Photo');}, 
-        err => {this.message = err;this._tosterService.showToast('danger', 'Error!!', err.message);});
-      
+      this._leadershipService.postLeader(this.leadership).subscribe(res => {
+        returnObj = res;
+        this._tosterService.showToast('warning', 'Warning!!', 'Created without Photo');
+        setTimeout(() => {
+          this.router.navigate(['admin/showLeaderships']);
+        }, 3000);
+      },
+        err => { this.message = err; this._tosterService.showToast('danger', 'Error!!', err.message); });
+
     }
   }
 

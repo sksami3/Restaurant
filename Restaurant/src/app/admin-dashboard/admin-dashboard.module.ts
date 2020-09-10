@@ -64,7 +64,9 @@ import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leade
 import { EditDishComponent } from './Dish/edit-dish/edit-dish.component';
 import { EditLeadershipComponent } from './Leadership/edit-leadership/edit-leadership.component';
 import { EditPromotionComponent } from './Promotion/edit-promotion/edit-promotion.component';
-
+import {
+  NbSpinnerModule,
+} from '@nebular/theme';
 
 
 @NgModule({
@@ -130,6 +132,7 @@ import { EditPromotionComponent } from './Promotion/edit-promotion/edit-promotio
 
     NbTreeGridModule,
     Ng2SmartTableModule,
+    NbSpinnerModule
   ],
   entryComponents:[
     EditDishComponent,EditLeadershipComponent,EditPromotionComponent

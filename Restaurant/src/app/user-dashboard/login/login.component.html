@@ -76,9 +76,13 @@
                     </mat-form-field>
                 </mat-card-content>
                 <button mat-stroked-button color="primary" class="btn-block" type="submit" [disabled]="loginForm.form.invalid">Log in</button>
+
             </form><br>
             <!-- <a [routerLink]="" (click)="goToRegisterPage()" style="font-size: 15px;"><i>Not Registered Yet?</i></a><br>
             <a [routerLink]="" (click)="goToHomePage()" style="font-size: 15px;"><i>Back to Home</i></a><br> -->
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{error}}
+            </div>
         </mat-card>
 
     </div>

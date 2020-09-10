@@ -34,6 +34,11 @@ export class CreatePromotionComponent implements OnInit {
   public progress: number;
   public message: string;
 
+  disableButton:boolean = false;
+  loadingLargeGroup = false;
+  loadingMediumGroup = false;
+  loading = false;
+
   constructor(private fb: FormBuilder,
     private _promotionService: PromotionService,
     private userService: UserService,
@@ -125,6 +130,17 @@ export class CreatePromotionComponent implements OnInit {
     }
   }
 
+  toggleLoadingLargeGroupAnimation() {
+    this.loadingLargeGroup = true;
+
+    //setTimeout(() => this.loadingLargeGroup = false, 3000);
+  }
+
+  toggleLoadingMediumGroupAnimation() {
+    this.loadingMediumGroup = true;
+
+    //setTimeout(() => this.loadingMediumGroup = false, 3000);
+  }
 
   onSubmit = () => {
     var returnObj: Promotion;
@@ -145,6 +161,7 @@ export class CreatePromotionComponent implements OnInit {
           alert(Error);
         }
       }).then((value) => {
+        this.disableButton = true;
         this.promotion.image = value;
         console.log(this.promotion);
         this._promotionService.postPromotion(this.promotion).subscribe(
@@ -156,10 +173,12 @@ export class CreatePromotionComponent implements OnInit {
             }, 3000);
           },
           err => {
+            this.disableButton = false;
             this.message = err;
             this._tosterService.showToast('danger', 'Error!!', err.message);
           });
       }).catch(err => {
+        this.disableButton = false;
         console.log(err);
         this.message = err.message;
         this._tosterService.showToast('danger', 'Error!!', err.message);

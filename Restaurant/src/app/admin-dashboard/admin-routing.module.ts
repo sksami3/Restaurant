@@ -18,47 +18,17 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
-        children: [{
-            path: '', component: ShowDishComponent
-        }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{
-            path: 'profile', component: ProfileComponent
-        }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{ path: 'createDish', component: CreateDishComponent }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{ path: 'showDishes', component: ShowDishComponent }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{ path: 'createPromotion', component: CreatePromotionComponent }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{ path: 'showPromotions', component: ShowPromotionComponent }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{ path: 'createLeadership', component: CreateLeadershipComponent }]
-    },
-    {
-        path: 'admin',
-        component: AdminComponent,
-        children: [{ path: 'showLeaderships', component: ShowLeadershipComponent }]
-    },
+        children: [
+            { path: '', component: ShowDishComponent },
+            { path: 'profile', component: ProfileComponent },
+            { path: 'createDish', component: CreateDishComponent },
+            { path: 'showDishes', component: ShowDishComponent },
+            { path: 'createPromotion', component: CreatePromotionComponent },
+            { path: 'showPromotions', component: ShowPromotionComponent },
+            { path: 'createLeadership', component: CreateLeadershipComponent },
+            { path: 'showLeaderships', component: ShowLeadershipComponent }
+        ]
+    }
 
 ];
 
