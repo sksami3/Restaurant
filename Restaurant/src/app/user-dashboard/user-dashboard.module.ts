@@ -40,6 +40,8 @@ import { AccountHeaderComponent } from './account-header/account-header.componen
 import { AgmCoreModule } from '@agm/core';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import { ToastrModule } from 'ngx-toastr';
+import { ForgetPasswordComponent } from './forget-password/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { ToastrModule } from 'ngx-toastr';
     HighliteDirective,
     UserProfileComponent,
     AccountHeaderComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

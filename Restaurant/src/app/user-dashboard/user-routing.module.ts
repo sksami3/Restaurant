@@ -10,6 +10,8 @@ import { DishdetailComponent } from '../user-dashboard/dishdetail/dishdetail.com
 import { UserComponent } from '../user-dashboard/user/user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { LoginComponent } from './login/login.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -42,6 +44,14 @@ export const routes: Routes = [
     },
     {
         path: 'login', component: LoginComponent,
+        //children: [{ path: '', component: LoginComponent }]
+    },
+    {
+        path: 'forgetPassword', component: ForgetPasswordComponent,
+        //children: [{ path: '', component: LoginComponent }]
+    },
+    {
+        path: 'changePassword/:resetId', component: ChangePasswordComponent,
         //children: [{ path: '', component: LoginComponent }]
     },
     { path: '', redirectTo: '/home', pathMatch: 'full' }

@@ -1,11 +1,13 @@
-﻿import { Injectable,NgZone } from '@angular/core';
+﻿import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
-import { baseURL } from '../Shared/baseurl';
+import { baseURL,ownUrl } from '../Shared/baseurl';
 import { User } from '../Shared/JWTModels/user';
+
+import{ProcessHTTPMsgService} from './process-httpmsg.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -14,7 +16,8 @@ export class AuthenticationService {
 
     constructor(
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private processHTTPMsgService: ProcessHTTPMsgService
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -49,5 +52,17 @@ export class AuthenticationService {
             this.router.navigate(['/']);
         }
 
+    }
+
+    sendResetLink(email: string,token: string) : Observable<boolean> {
+        console.log(token);
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+
+        return this.http.post<boolean>(`${baseURL}users/SendResetLink`, { email,token }, httpOptions)
+            .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 }

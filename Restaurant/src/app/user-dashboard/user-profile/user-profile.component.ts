@@ -126,7 +126,11 @@ export class UserProfileComponent implements OnInit {
             this.disableButton = false;
           }
 
-        }, err => this.message = err);
+        }, err => {
+          console.log(err);
+          this.disableButton = false;
+          this.message = err
+        });
       }).catch(err => {
         console.log(err);
         this.disableButton = false;
@@ -149,12 +153,14 @@ export class UserProfileComponent implements OnInit {
           }, 3000);
         }
         else {
-          this.toastr.error('username or email already exists','Problem!');
+          this.toastr.error('username or email already exists', 'Problem!');
           this.disableButton = false;
         }
       }, err => {
+        console.log(err)
+        this.disableButton = false;
         this.message = err;
-        this.toastr.error(this.message,'Error');
+        this.toastr.error(err.message, 'Error');
       });
     }
   }

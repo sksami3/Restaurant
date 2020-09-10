@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/createProfile');
     //this.dialogRef.close();
   }
-  goToHomePage(): void {
-    this.router.navigateByUrl('/');
+  goToForgetPassword(): void {
+    this.router.navigateByUrl('/forgetPassword');
   }
   onSubmit() {
     //console.log('User: ', this.user);

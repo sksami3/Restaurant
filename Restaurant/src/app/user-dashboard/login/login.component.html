@@ -78,8 +78,8 @@
                 <button mat-stroked-button color="primary" class="btn-block" type="submit" [disabled]="loginForm.form.invalid">Log in</button>
 
             </form><br>
-            <!-- <a [routerLink]="" (click)="goToRegisterPage()" style="font-size: 15px;"><i>Not Registered Yet?</i></a><br>
-            <a [routerLink]="" (click)="goToHomePage()" style="font-size: 15px;"><i>Back to Home</i></a><br> -->
+            <!-- <a [routerLink]="" (click)="goToRegisterPage()" style="font-size: 15px;"><i>Not Registered Yet?</i></a><br> -->
+            <a [routerLink]="" (click)="goToForgetPassword()" style="font-size: 15px;"><i>Forget Password?</i></a><br>
             <div *ngIf="error" class="alert alert-danger" role="alert">
                 <strong>Sorry!</strong> {{error}}
             </div>
