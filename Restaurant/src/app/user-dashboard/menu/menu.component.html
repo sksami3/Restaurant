@@ -8,7 +8,7 @@
 
     <div fxFlex *ngIf="dishes" [@expand]>
         <mat-grid-list cols="2" rowHeight="4:2">
-            <mat-grid-tile *ngFor="let d of dishes" [routerLink]="['/dishDetail', d.id]" appHighlite>
+            <mat-grid-tile *ngFor="let d of data" [routerLink]="['/dishDetail', d.id]" appHighlite>
                 <!-- (click) = "clickedDish(d)" -->
                 <img height="100%" src="{{ BaseURL + d.image }}" alt="{{d.name}}">
                 <mat-grid-tile-footer style="background-color:rebeccapurple">
@@ -28,7 +28,8 @@
     </div>
 
     <!-- <app-dishdetail [dish] = "selectedDish"></app-dishdetail> -->
-
+    <mat-paginator class="mat-paginator-container" [length]="dishes.length" [pageSize]="size" [pageIndex]="page" [pageSizeOptions]="[2,4, 8, 12]" (page)="getDataWithPagination($event)">
+    </mat-paginator>
 
 
 </div>

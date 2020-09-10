@@ -18,8 +18,9 @@
                     <button mat-button [routerLink]="['/dishDetail', prev]"><span
                             class="fa fa-chevron-left fa-lg"></span></button>
                     <button mat-button (click)="goBack()">Back</button>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
+                    <button mat-button style="visibility: hidden;">LIKE</button>
+                    <button mat-button style="visibility: hidden;">SHARE</button>
+                    <button mat-button style="visibility: hidden;">LIKE</button>
                     <button mat-button [routerLink]="['/dishDetail', next]"><span
                             class="fa fa-chevron-right fa-lg"></span></button>
                     <!-- (click)="nextClicked()" -->
@@ -43,7 +44,7 @@
         <hr>
 
         <mat-list *ngIf="dish" [@visi]="visibility" [@expand]>
-            <mat-list-item *ngFor="let c of dish.comments">
+            <mat-list-item *ngFor="let c of data">
                 <p mat-line>{{ c.viewerscomment }}</p> <br>
                 <p mat-line>{{ c.rating }} Stars</p> <br>
                 <p mat-line>-- {{ c.author }} {{c.date | date}}</p> <br>
@@ -57,6 +58,8 @@
                 <mat-divider></mat-divider>
             </mat-list-item>
         </mat-list>
+        <mat-paginator class="mat-paginator-container" [length]="commentsForPagination.length" [pageSize]="size" [pageIndex]="page" [pageSizeOptions]="[2,4, 8, 12]" (page)="getDataWithPagination($event)">
+        </mat-paginator>
 
         <div [hidden]="dish">
             <mat-spinner></mat-spinner>
@@ -87,7 +90,8 @@
                         </mat-error>
                     </mat-form-field>
                 </p>
-                <button type="submit" [disabled]="commentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+                <button *ngIf="isLoggedIn" type="submit" [disabled]="commentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+                <button *ngIf="!isLoggedIn" routerLink='/login' mat-button class="background-primary text-floral-white">Please log in to comment</button>
             </form><br>
         </div>
 

@@ -15,11 +15,11 @@ export class UserService {
         return this.http.get<User[]>(`${baseURL}`+"users");
     }
 
-    getById(id: number) {
+    getById(id: number): Observable<User> {
         return this.http.get<User>(`${baseURL}`+"users/"+id);
     }
 
-    create(user: User) {
+    create(user: User) : Observable<User> {
         console.log(user);
         const httpOptions = {
             headers: new HttpHeaders({

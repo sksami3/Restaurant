@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
     Login
     <span class="flex-spacer"></span>
     <button mat-button mat-dialog-close>&times;</button>
@@ -29,4 +29,62 @@
         <button type="submit" mat-button class="background-primary text-floral-white" [ngClass]="{'customclass': loginForm.form.invalid}" [disabled]="loginForm.form.invalid">Login</button>
     </mat-dialog-actions>
 
-</form>
+</form> -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+
+        <h1 routerLink='/home'>Developer's Restaurant</h1>
+        <span class="menu-spacer"></span>
+        <div>
+            <a mat-button [routerLink]="'/createProfile'"> Not registered yet? </a>
+            <a mat-button [routerLink]="'/'"> Home </a>
+            <!-- <a mat-button [routerLink]="'/contacts'"> Contacts </a>
+            <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+            <a mat-button [routerLink]="'/activities'"> Activities </a>
+            <a mat-button [routerLink]="'/create-activity'"> Create Activity </a> -->
+
+        </div>
+    </mat-toolbar-row>
+
+    <!-- <mat-toolbar-row>
+        <span style="font-size: 12px;">Create your profile</span>
+    </mat-toolbar-row> -->
+</mat-toolbar>
+
+<body>
+
+    <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+        <mat-card class="box">
+            <mat-card-header>
+                <mat-card-title>Log in</mat-card-title>
+            </mat-card-header>
+
+            <form class="example-form" #loginForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+                <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                        <!-- <input matInput placeholder="Username"> -->
+                        <input #username="ngModel" matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username" required>
+                        <mat-error *ngIf="username.errors?.required">Username can't be null</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="example-full-width">
+                        <!-- <input matInput placeholder="Password"> -->
+                        <input #password="ngModel" matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password" required>
+                        <mat-error *ngIf="password.errors?.required">Password can't be null</mat-error>
+                    </mat-form-field>
+                </mat-card-content>
+                <button mat-stroked-button color="primary" class="btn-block" type="submit" [disabled]="loginForm.form.invalid">Log in</button>
+
+            </form><br>
+            <!-- <a [routerLink]="" (click)="goToRegisterPage()" style="font-size: 15px;"><i>Not Registered Yet?</i></a><br> -->
+            <a [routerLink]="" (click)="goToForgetPassword()" style="font-size: 15px;"><i>Forget Password?</i></a><br>
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+                <strong>Sorry!</strong> {{error}}
+            </div>
+        </mat-card>
+
+    </div>
+    <!-- </div> -->
+</body>

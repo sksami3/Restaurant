@@ -3,8 +3,7 @@ $background-dark: #512DA8;
 $background-light: #9575CD;
 $background-pale: #D1C4E9;
 $background-customCC: #426aE9;
-
-.active{
+.active {
     background: $background-customCC;
 }
 
@@ -13,14 +12,61 @@ $background-customCC: #426aE9;
     padding: $pad-up-down $pad-left-right;
 }
 
-.footer{
+.footer {
     background-color: $background-pale;
     @include zero-margin(20px, 0px);
 }
 
-.btn-facebook {color:#fff!important; background-color:#3b5998!important;}
-.btn-google-plus{color:#fff!important;background-color:#dd4b39!important;}
-.btn-youtube{color:#fff!important;background-color:#ff4b39!important;}
-.btn-linkedin{color:#fff!important;background-color:#007bb6!important;}
-.btn-twitter{color:#fff!important;background-color:#55acee!important;}
-.btn-mail{color:#fff!important;background-color:#512DA8!important;}
+.btn-facebook {
+    color: #fff!important;
+    background-color: #3b5998!important;
+}
+
+.btn-google-plus {
+    color: #fff!important;
+    background-color: #dd4b39!important;
+}
+
+.btn-youtube {
+    color: #fff!important;
+    background-color: #ff4b39!important;
+}
+
+.btn-linkedin {
+    color: #fff!important;
+    background-color: #007bb6!important;
+}
+
+.btn-twitter {
+    color: #fff!important;
+    background-color: #55acee!important;
+}
+
+.btn-mail {
+    color: #fff!important;
+    background-color: #512DA8!important;
+}
+
+.footerWithBackgroundImage {
+    //@include zero-margin(70px, 30px);
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    min-height: 150px;
+    background: url('../../../assets/footer.gif') no-repeat center center fixed;
+}
+
+.container {
+    color: white !important;
+}
+
+.mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button {
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 36px;
+    color: white !important;
+}

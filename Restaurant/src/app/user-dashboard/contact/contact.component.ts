@@ -5,6 +5,8 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Feedback, ContactType } from '../../Shared/feedback';
 import { FeedbackService } from '../../services/feedback.service';
 import { expand } from '../../animations/app.animation';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -25,8 +27,12 @@ export class ContactComponent implements OnInit {
   feedBackErrorMsg: string;
   waitFor5Sec: boolean = false;
   runSpinner: boolean = false;
+  //map
+  title = 'Map Of Our Location';
+  lat = 23.824273;
+  lng = 90.365513;
 
-  constructor(private fb: FormBuilder, private _feedbackService: FeedbackService) {
+  constructor(private fb: FormBuilder, private _feedbackService: FeedbackService, private toastr: ToastrService) {
     this.createFormGroup();
   }
 
@@ -104,14 +110,16 @@ export class ContactComponent implements OnInit {
         .subscribe(f => resolve(f), errMSG => reject(errMSG));
     })
       .then(value => {
-        this.feedBackReturnObject = value,
-          this.waitFor5Sec = true;
-          this.runSpinner = false;
+        this.toastr.success('Submitted Successfully','Success!')
+        this.feedBackReturnObject = value;
+        this.waitFor5Sec = true;
+        this.runSpinner = false;
         setTimeout(() => {
-          this.waitFor5Sec = false;          
+          this.waitFor5Sec = false;
         }, 5000)
       })
       .catch(error => {
+        this.toastr.success(error.message,'Error!')
         this.feedBackErrorMsg = error;
         this.runSpinner = false;
         setTimeout(() => {

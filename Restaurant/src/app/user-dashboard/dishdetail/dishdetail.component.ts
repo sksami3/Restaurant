@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Comment } from '../../Shared/comment';
 import { visibility, controlInOutWithFlyingAnimation, expand } from '../../animations/app.animation'
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/Shared/JWTModels/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dishdetail',
@@ -29,6 +32,7 @@ export class DishdetailComponent implements OnInit {
   // @Input()
   dish: Dish;
   dishCopy: Dish;
+  commentsForPagination: Array<Comment> = [];
   dishErrMessage: string;
   dishIds: Array<string>;
   prev: string;
@@ -49,19 +53,44 @@ export class DishdetailComponent implements OnInit {
   vertical = false;
   tickInterval = 1;
 
+  menuErrMsg: string;
+  //selectedDish: Dish;
+  page = 0;
+  size = 4;
+  data = [];
+  isLoggedIn: boolean = false;
+  user: User;
+
   constructor(private dishService: DishService,
     private rout: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
+    private auth : AuthenticationService,
+    private toastr: ToastrService,
     @Inject('BaseURL') private BaseURL) {
     this.createForm();
+    this.user = auth.userValue;
+    if(this.user && this.user.role=='User'){
+      this.isLoggedIn= true;
+    }
   }
 
   ngOnInit(): void {
     this.dishService.getDishIds().subscribe((dishIds) => this.dishIds = dishIds, errorMsg => this.dishErrMessage = errorMsg);
-    
-    this.rout.params.pipe(switchMap((params: Params) => { this.visibility = "_hidden"; return this.dishService.getDish(params['id']); }))
-      .subscribe((dish) => { this.visibility = "_shown"; this.dish = dish; this.dishCopy = dish; this.setPrevNext(dish.id) }, function (errorMsg) { return this.dishErrMessage = errorMsg; });
+
+    this.rout.params.pipe(switchMap((params: Params) => {
+      this.visibility = "_hidden";
+      return this.dishService.getDish(params['id']);
+    }))
+      .subscribe((dish) => {
+        this.visibility = "_shown";
+        this.dish = dish;
+        this.dishCopy = dish;
+        this.commentsForPagination = dish.comments;
+        this.getDataWithPagination({ pageIndex: this.page, pageSize: this.size, commentss: this.commentsForPagination });
+        this.setPrevNext(dish.id);
+      },
+        function (errorMsg) { return this.dishErrMessage = errorMsg; });
 
     // const id = this.rout.snapshot.params['id'];
     // this.dishService.getDish(id).subscribe((dish) => this.dish = dish);
@@ -141,19 +170,47 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
     this.comment.dishId = parseInt(this.dish.id);
-    //this.dish.comments.push(this.comment);
     this.dishService.postComment(this.comment)
-    .subscribe(f => this.dishService.getDish(f.dishId.toString())
-    .subscribe(res => {console.log(res),this.dish = res, this.dishCopy = res}, err => {this.dish = null, this.dishCopy = null, this.dishErrMessage = err}),
-    (err)=> {this.dishErrMessage = <any>err, console.log(err)});
+      .subscribe(f => this.dishService.getDish(f.dishId.toString())
+        .subscribe(res => { 
+          console.log(res); 
+          this.dish = res;
+          this.dishCopy = res;
+          this.commentsForPagination = res.comments;
+          // this.data = res.comments.reverse();
+          this.getDataWithPagination({ pageIndex: this.page, pageSize: this.size, commentss: res.comments });
+          this.toastr.success('Congratulations!!', 'Comment Submitted');
+         }, err => { 
+           this.dish = null; 
+           this.dishCopy = null; 
+           this.dishErrMessage = err;
+           this.toastr.error('Error!!', 'Please Try Again Later');
+          }),
+        (err) => { 
+          this.dishErrMessage = <any>err; 
+          console.log(err);
+          this.toastr.error('Error!!', 'Please Try Again Later');
+        });
 
-
-    // this.dishService.putDishe(this.dishCopy)
-    //   .subscribe((d) => { this.dish = d, this.dishCopy = d },
-    //     (errmsg) => { this.dish = null, this.dishCopy = null, this.dishErrMessage = <any>errmsg });
     this.commentForm.reset(this.commentForm.value);
   }
+  getDataWithPagination(obj) {
+    let index = 0,
+      startingIndex = obj.pageIndex * obj.pageSize,
+      endingIndex = startingIndex + obj.pageSize;
+    if (obj.commentss) {
+      this.data = obj.commentss.filter(() => {
+        index++;
+        return (index > startingIndex && index <= endingIndex) ? true : false;
+      }).reverse();
+    } else {
+      this.data = this.commentsForPagination.filter(() => {
+        index++;
+        return (index > startingIndex && index <= endingIndex) ? true : false;
+      }).reverse();
+    }
 
+  }
 
 
 }

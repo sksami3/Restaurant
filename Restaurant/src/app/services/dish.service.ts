@@ -23,6 +23,10 @@ export class DishService
     return this.http.get<Dish>(baseURL+'dishes/' +id).pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
+  deleteDish(id : string) : Observable<Dish>{
+    return this.http.delete <Dish>(baseURL+'dishes/' +id).pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
   getFeatured() : Observable<Dish>{
     return this.http.get<Dish>(baseURL+'dishes?featured=true').pipe(map(dishes => dishes[0])).pipe(catchError(this.processHTTPMsgService.handleError));
   }
@@ -44,6 +48,17 @@ export class DishService
     };
 
     return this.http.put<Dish>(baseURL + 'dishes/' + dish.id,dish,httpOptions)
+    .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
+  postDishe(dish : Dish):Observable<Dish>{
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.post<Dish>(baseURL + 'dishes/',dish,httpOptions)
     .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 

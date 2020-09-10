@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
-    <span><img src="/assets/images/logo.png" height=30 width=41></span>
-    <a mat-button routerLink='/home' routerLinkActive="active"><span class="fa fa-home fa-lg"></span> Home</a>
+    <span><img src="/assets/images/logo.png" routerLink='/home' height=30 width=41></span>
+    <a *ngIf='isAdmin' mat-button routerLink='/admin' routerLinkActive="active"><span class="fa fa-unlock"></span> Admin Panel</a>
+    <a mat-button routerLink='/home' routerLinkActive="active"><span class="fa fa-home fa-lg"></span> <span class="footerButton">Home</span></a>
     <a mat-button routerLink='/about' routerLinkActive="active"><span class="fa fa-info fa-lg"></span> About</a>
     <a mat-button routerLink='/menu' routerLinkActive="active"><span class="fa fa-list fa-lg"></span> Menu</a>
     <a mat-button routerLink='/contact' routerLinkActive="active"><span class="fa fa-address-card fa-lg"></span> Contact</a>
@@ -11,7 +12,7 @@
     <mat-menu class="bccolor" #menu="matMenu" [overlapTrigger]="false">
         <span (mouseleave)="undoDropProfileDetails()">
 
-          <button mat-menu-item [routerLink]="['/createProfile']">
+         <button mat-menu-item >  <!-- [routerLink]="['/createProfile']" -->
             <mat-icon>account_box</mat-icon>
             <span>Account</span>
         </button>
@@ -31,7 +32,7 @@
 
     <div fxFlex fxFlex.gt-sm="50%">
         <h1>Developer's Restaurant</h1>
-        <p>We take inspiration from the World's best cuisines, and create a unique food experience. Our lipsmacking creations will tickle your culinary senses!</p>
+        <p><b><i>Good time, Great taste</i></b></p>
     </div>
     <div fxFlex fxFlex.gt-sm="20%">
         <img src="/assets/images/logo.png" alt="Logo" height="180x">

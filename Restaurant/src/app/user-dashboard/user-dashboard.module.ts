@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 
 import {MatMenuModule} from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog'; 
+
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import { FormsModule }   from '@angular/forms';
 import {MatInputModule} from '@angular/material/input'; 
@@ -35,21 +36,31 @@ import { UserRoutingModule } from './user-routing.module';
 
 import { HighliteDirective } from '../directives/highlite.directive';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AccountHeaderComponent } from './account-header/account-header.component';
+import { AgmCoreModule } from '@agm/core';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import { ToastrModule } from 'ngx-toastr';
+import { ForgetPasswordComponent } from './forget-password/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     MenuComponent,
     DishdetailComponent,
-    HeaderComponent,
+    
     FooterComponent,
     AboutComponent,
     HomeComponent,
     ContactComponent,
     LoginComponent,
+    HeaderComponent,
     UserComponent,
     HighliteDirective,
-    UserProfileComponent
+    UserProfileComponent,
+    AccountHeaderComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -74,11 +85,20 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ,MatIconModule
     ,UserRoutingModule
     ,FileUploadModule
+    ,AgmCoreModule.forRoot({
+      apiKey: ''
+    }),
+    MatPaginatorModule,
+    ToastrModule.forRoot()
   ],
   entryComponents:[
-    LoginComponent
+    //LoginComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
+  ],
   exports: [
     UserComponent
   ]

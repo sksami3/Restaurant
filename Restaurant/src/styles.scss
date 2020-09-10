@@ -72,3 +72,64 @@ $mat-card-header-size: 50px !default;
 .bccolor {
     background-color: $lt-gray;
 }
+
+//table filter off
+// tr.ng2-smart-filters {
+//     visibility: collapse !important;
+// }
+// .ng2-custom-actions-inline {
+//     .ng2-smart-action-custom-custom {
+//         display: inline-block !important;
+//         height: auto !important;
+//         width: auto !important;
+//     }
+// }
+:host /deep/ ng2-st-tbody-edit-delete {
+    display: flex !important;
+    height: 100 !important;
+    width: 66% !important;
+    padding-top: 26px;
+}
+
+ :host /deep/ ng2-st-tbody-delete-delete {
+    padding-top: 17px;
+}
+
+ :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-edit-delete {
+    width: 100% !important;
+    text-align: center;
+    font-size: 1.1em;
+    color: #3baf29;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    height: 100 !important;
+}
+
+ :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-edit-delete:hover {
+    color: #5dcfe3;
+}
+
+.nb-edit {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+    width: 100%;
+    font-size: 2rem !important;
+    color: #222b45;
+}
+
+.nb-edit:hover {
+    color: red;
+}
+
+.nb-trash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    max-width: 540px;
+    max-height: 360px;
+}

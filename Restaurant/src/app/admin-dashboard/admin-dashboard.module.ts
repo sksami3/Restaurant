@@ -23,10 +23,66 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import 'hammerjs';
 
+import { FileUploadModule } from 'ng2-file-upload';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './@core/core.module';
+import { ThemeModule } from './@theme/theme.module';
+
+import { NbCardModule, NbIconModule, NbInputModule, NbTreeGridModule } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
+
+import {
+  NbChatModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbMenuModule,
+  NbSidebarModule,
+  NbToastrModule,
+  NbWindowModule,
+} from '@nebular/theme';
+import { CreateDishComponent } from './Dish/create-dish/create-dish.component';
+
+import {
+  NbActionsModule,
+  NbButtonModule,
+  NbCheckboxModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbUserModule,
+} from '@nebular/theme';
+
+import { FormsModule as ngFormsModule } from '@angular/forms';
+import { CreatePromotionComponent } from './Promotion/create-promotion/create-promotion.component';
+import { CreateLeadershipComponent } from './Leadership/create-leadership/create-leadership.component';
+import { ShowDishComponent } from './Dish/show-dish/show-dish.component';
+
+
+import { ShowPromotionComponent } from './Promotion/show-promotion/show-promotion.component';
+import { ShowLeadershipComponent } from './Leadership/show-leadership/show-leadership.component';
+import { EditDishComponent } from './Dish/edit-dish/edit-dish.component';
+import { EditLeadershipComponent } from './Leadership/edit-leadership/edit-leadership.component';
+import { EditPromotionComponent } from './Promotion/edit-promotion/edit-promotion.component';
+import {
+  NbSpinnerModule,
+} from '@nebular/theme';
 
 
 @NgModule({
-  declarations: [ProfileComponent, AdminComponent],
+  declarations: [
+    ProfileComponent, 
+    AdminComponent, 
+    CreateDishComponent, 
+    CreatePromotionComponent, 
+    CreateLeadershipComponent, 
+    ShowDishComponent, 
+    ShowPromotionComponent,
+    ShowLeadershipComponent,
+    EditDishComponent,
+    EditLeadershipComponent,
+    EditPromotionComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -46,7 +102,40 @@ import 'hammerjs';
     ,MatSlideToggleModule,
     MatSelectModule
     ,MatProgressSpinnerModule
-    ,MatSliderModule
+    ,MatSliderModule,
+    FileUploadModule,
+    BrowserModule,
+    HttpClientModule,
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    CoreModule.forRoot(),
+    ThemeModule.forRoot(),
+
+    NbInputModule,
+    NbCardModule,
+    NbButtonModule,
+    NbActionsModule,
+    NbUserModule,
+    NbCheckboxModule,
+    NbRadioModule,
+    NbDatepickerModule,
+    NbSelectModule,
+    NbIconModule,
+    ngFormsModule,
+
+    NbTreeGridModule,
+    Ng2SmartTableModule,
+    NbSpinnerModule
+  ],
+  entryComponents:[
+    EditDishComponent,EditLeadershipComponent,EditPromotionComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   exports: [
@@ -54,3 +143,35 @@ import 'hammerjs';
   ]
 })
 export class AdminDashboardModule { }
+
+
+
+/*  
+
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbDatepickerModule.forRoot(),
+    NbDialogModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
+    CoreModule.forRoot(),
+    ThemeModule.forRoot(),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+}
+
+
+*/
