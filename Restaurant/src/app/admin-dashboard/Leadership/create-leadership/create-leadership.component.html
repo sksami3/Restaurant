@@ -29,24 +29,28 @@
                         <label for="Name" class="label col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
                             <input type="text" nbInput fullWidth formControlName="Name" placeholder="Name">
+                            <mat-error *ngIf="formErrors.Name">{{formErrors.Name}}</mat-error>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="Abbr" class="label col-sm-3 col-form-label">Abbr</label>
                         <div class="col-sm-9">
                             <input type="text" nbInput fullWidth formControlName="Abbr" placeholder="Abbr">
+                            <mat-error *ngIf="formErrors.Abbr">{{formErrors.Abbr}}</mat-error>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="Designation" class="label col-sm-3 col-form-label">Designation</label>
                         <div class="col-sm-9">
                             <input type="text" nbInput fullWidth formControlName="Designation" placeholder="Designation">
+                            <mat-error *ngIf="formErrors.Designation">{{formErrors.Designation}}</mat-error>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="Description" class="label col-sm-3 col-form-label">Description</label>
                         <div class="col-sm-9">
                             <textarea rows="5" nbInput fullWidth shape="round" formControlName="Description" placeholder="Description"></textarea>
+                            <mat-error *ngIf="formErrors.Description">{{formErrors.Description}}</mat-error>
                         </div>
                     </div>
 
@@ -60,7 +64,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="offset-sm-3 col-sm-9">
-                            <button (click)="toggleLoadingLargeGroupAnimation()" type="submit" nbButton status="success" size="large" [disabled]="disableButton" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="Submitting">Create Leadership</button>
+                            <button (click)="toggleLoadingLargeGroupAnimation()" type="submit" nbButton status="success" size="large" [disabled]="disableButton || leadershipForm.invalid" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="Submitting">Create Leadership</button>
                         </div>
                     </div>
                 </form>

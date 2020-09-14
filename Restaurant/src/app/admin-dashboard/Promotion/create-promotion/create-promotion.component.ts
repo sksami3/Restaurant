@@ -48,7 +48,10 @@ export class CreatePromotionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.promotionForm.valueChanges.subscribe((data) => this.onValueChange(data));
+    this.promotionForm.valueChanges.subscribe((data) => {
+      this.onValueChange(data);
+      console.log(data);
+    });
     this.onValueChange();
   }
 
@@ -111,6 +114,7 @@ export class CreatePromotionComponent implements OnInit {
   };
 
   onValueChange(data?: any) {
+    console.log('on value change');
     if (!this.promotionForm) { return; }
     const form = this.promotionForm;
     for (const field in this.formErrors) {

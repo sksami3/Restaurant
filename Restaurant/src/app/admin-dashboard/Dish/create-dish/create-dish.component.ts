@@ -37,7 +37,7 @@ export class CreateDishComponent implements OnInit {
   fileToUpload: any;
   public progress: number;
   public message: string;
-  disableButton:boolean = false;
+  disableButton: boolean = false;
   loadingLargeGroup = false;
   loadingMediumGroup = false;
   loading = false;
@@ -52,7 +52,11 @@ export class CreateDishComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dishForm.valueChanges.subscribe((data) => this.onValueChange(data));
+    this.dishForm.valueChanges.subscribe((data) => {
+      this.onValueChange(data);
+      console.log(data);
+    }
+    );
     this.onValueChange();
   }
 
@@ -157,10 +161,10 @@ export class CreateDishComponent implements OnInit {
 
       var something = new Promise<any>((resolve, reject) => {
         try {
-          this.userService.uploadImage(formData).subscribe(f => { 
-            console.log(f); 
-            resolve(f); 
-          }, errMSG => { 
+          this.userService.uploadImage(formData).subscribe(f => {
+            console.log(f);
+            resolve(f);
+          }, errMSG => {
             reject(errMSG);
           });
         }
@@ -177,10 +181,10 @@ export class CreateDishComponent implements OnInit {
             new Promise<any>((resolve, reject) => {
               this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
             })
-            
+
             setTimeout(() => {
               this.router.navigate(['admin/showDishes']);
-          }, 3000);  //5s
+            }, 3000);  //5s
           },
           err => {
             this.disableButton = false;
@@ -188,7 +192,7 @@ export class CreateDishComponent implements OnInit {
             this._tosterService.showToast('danger', 'Error!!', err.message);
           }
         );
-        
+
       }).catch(err => {
         this.disableButton = false;
         console.log(err);
@@ -204,7 +208,7 @@ export class CreateDishComponent implements OnInit {
         this._tosterService.showToast('warning', 'Warning!!', 'Created without Photo');
         setTimeout(() => {
           this.router.navigate(['admin/showDishes']);
-      }, 3000); 
+        }, 3000);
       }, err => {
         this.message = err;
         this._tosterService.showToast('danger', 'Error!!', err.message);
