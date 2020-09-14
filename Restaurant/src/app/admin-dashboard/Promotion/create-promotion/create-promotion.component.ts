@@ -173,7 +173,7 @@ export class CreatePromotionComponent implements OnInit {
             returnObj = res;
             this._tosterService.showToast('success', 'Congratulations!!', 'Created Successfully');
             setTimeout(() => {
-              this.router.navigate(['admin/showDishes']);
+              this.router.navigate(['admin/showPromotions']);
             }, 3000);
           },
           err => {
