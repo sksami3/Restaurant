@@ -42,6 +42,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ToastrModule } from 'ngx-toastr';
 import { ForgetPasswordComponent } from './forget-password/forget-password/forget-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
 
 
 @NgModule({
@@ -89,7 +95,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
       apiKey: ''
     }),
     MatPaginatorModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SocialLoginModule
   ],
   entryComponents:[
     //LoginComponent
@@ -97,7 +104,31 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '68046549740-5elppbipj7atgv0pv50ocvclhv705r09.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('251763382835618'),
+          },
+          {
+            id: AmazonLoginProvider.PROVIDER_ID,
+            provider: new AmazonLoginProvider(
+              'clientId'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
   ],
   exports: [
     UserComponent

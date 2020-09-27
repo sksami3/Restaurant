@@ -38,6 +38,23 @@ export class AuthenticationService {
             }));
     }
 
+    loginByEmail(email: string) {
+        console.log(email);
+        const httpOptions = {
+            headers : new HttpHeaders({
+              'Content-Type':  'application/json'
+            })
+          };
+
+        return this.http.post<any>(`${baseURL}users/GetByEmail?email=`+ email,httpOptions)
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+                this.userSubject.next(user);
+                return user;
+            }));
+    }
+
     logout() {
         if (this.userValue.role == 'Admin') {
             localStorage.removeItem('user');
