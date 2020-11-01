@@ -24,4 +24,4 @@ Web based solution where small or medium size Restaurant can promote their busin
 
 ------
 ## License and Copyright
-©Sk Samiur Rahman 2019
+©Sk Samiur Rahman 2020
